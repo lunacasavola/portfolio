@@ -1,0 +1,18 @@
+<h2 class="section-title">{{ 'skills.title' | translate }}</h2>
+
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+  <div
+    *ngFor="let s of skills"
+    class="glass p-4 flex flex-col items-center gap-2 hover:shadow-[0_0_30px_rgba(245,158,11,0.35)] transition glitch-hover"
+  >
+    <div class="h-8 w-8 rounded-lg" [ngStyle]="{ background: s.color }"></div>
+    <div class="text-sm">{{ s.name }}</div>
+  </div>
+</div>
+
+<div class="mt-8 grid sm:grid-cols-2 gap-4">
+  <div *ngFor="let group of groups" class="glass p-4">
+    <div class="text-sm font-medium text-white/90 mb-2">{{ group.titleKey | translate }}</div>
+    <p class="text-sm text-white/60 leading-relaxed">{{ group.items }}</p>
+  </div>
+</div>

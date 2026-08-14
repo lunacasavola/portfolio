@@ -1,0 +1,11 @@
+/* Ensure proper z-index layering */
+.relative {
+  position: relative;
+}
+
+/* Main content should be above background */
+main {
+  position: relative;
+  z-index: 10;
+}
+

@@ -1,0 +1,39 @@
+<div class="color-picker-container">
+  <button 
+    class="color-picker-button"
+    (click)="togglePicker()"
+    [style.background-color]="currentColor"
+    [attr.aria-label]="'Change color theme'"
+    title="Change color theme"
+  >
+    <svg class="color-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+    </svg>
+  </button>
+
+  <div class="color-picker-panel" #panel [class.open]="isOpen">
+    <div class="panel-header">
+      <span class="panel-title">Color Theme</span>
+      <button class="close-button" (click)="togglePicker()" aria-label="Close">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="panel-content">
+      <label class="color-input-label">
+        <span>Accent Color</span>
+        <input 
+          type="color" 
+          [value]="currentColor"
+          (input)="onColorChange($event)"
+          class="color-input"
+        />
+      </label>
+      <button class="reset-button" (click)="resetColor()">
+        Reset to Default
+      </button>
+    </div>
+  </div>
+</div>
+

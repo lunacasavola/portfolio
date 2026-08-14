@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "home": "Home",
+    "info": "Info",
+    "summary": "Summary",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Luna Casavola",
+    "subtitle": "Full-Stack Developer | .NET • Angular • SQL Server",
+    "cv": "Download CV",
+    "linkedin": "LinkedIn"
+  },
+  "info": {
+    "title": "General Info",
+    "age": "Age",
+    "ageValue": "24",
+    "location": "Location",
+    "locationValue": "Buenos Aires, Argentina",
+    "email": "Email",
+    "languages": "Languages",
+    "languagesValue": "Spanish (Native) • English (Fluent)",
+    "openToWork": "Open to work",
+    "openToWorkValue": "Yes"
+  },
+  "summary": {
+    "title": "Professional Summary",
+    "p1": "Full-Stack Developer with 3+ years of experience designing, developing, and maintaining enterprise web applications using C#, .NET/.NET Core, Angular, TypeScript, REST APIs, and SQL Server. Strong background in backend development, business logic, database-driven applications, and system integrations.",
+    "p2": "Experienced developing configurable software products for multiple customers, implementing customer-specific business rules and functionality while maintaining a shared application core. Hands-on experience with WMS, inventory and logistics systems, warehouse automation, production support, and integrations with external systems and devices.",
+    "p3": "Strong problem-solving and debugging skills, with experience working across backend, frontend, database, and integration layers. Comfortable collaborating with technical and non-technical stakeholders, analyzing requirements, and learning new technologies and architectures.",
+    "interestsTitle": "Professional Interests",
+    "interests": "Backend development and architecture, distributed systems, cloud technologies, system integrations, performance optimization, and exploring new technologies and development practices."
+  },
+  "skills": {
+    "title": "Stack / Skills",
+    "backend": "Backend",
+    "databases": "Databases",
+    "frontend": "Frontend",
+    "mobile": "Mobile Development",
+    "devops": "DevOps & Tools",
+    "systems": "Systems & Integrations",
+    "practices": "Engineering Practices",
+    "domain": "Domain"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Interactive previews of websites and projects I've worked on.",
+    "visit": "Visit Site",
+    "video": "Video",
+    "stringSistemas": {
+      "name": "String Sistemas",
+      "description": "WMS and logistics software for warehouse operations, inventory, and product distribution."
+    }
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "string": {
+      "company": "String Sistemas",
+      "location": "Buenos Aires, Argentina",
+      "role": "Full-Stack WMS Application Developer",
+      "period": "Jan 2024 – Sep 2025",
+      "h1": "Developed and maintained enterprise Warehouse Management System (WMS) applications using C#, .NET/.NET Core, Angular, TypeScript, REST APIs, and SQL Server.",
+      "h2": "Managed and maintained 9 WMS projects simultaneously across different Angular and .NET versions, ensuring application stability, compatibility, and reliable operation across customer environments.",
+      "h3": "Led end-to-end development from requirements analysis and data modeling in Erwin Data Modeler through backend development, database implementation, frontend development, deployment, and user training.",
+      "h4": "Developed a configurable WMS product for multiple customers, implementing customer-specific parameters, business rules, and functionality while maintaining a shared application core.",
+      "h5": "Designed and implemented backend business logic and database operations supporting inventory, orders, picking, and warehouse processes.",
+      "h6": "Developed and optimized SQL Server queries and T-SQL operations for business-critical warehouse workflows.",
+      "h7": "Built Ionic mobile applications for Zebra handheld devices, integrating mobile workflows with the WMS platform and warehouse operations.",
+      "h8": "Integrated Pick-to-Light (PTL) systems, ZPL label printing, and robotic sorter automation with software-driven warehouse workflows.",
+      "h9": "Developed an internal BI framework that enabled administrative users to create custom dashboards and reports, reducing reliance on IT support.",
+      "h10": "Provided advanced production support and real-time troubleshooting, diagnosing issues across application, database, integration, and infrastructure layers to minimize disruption to warehouse operations.",
+      "h11": "Collaborated with developers, users, and business stakeholders to analyze requirements, investigate issues, and deliver improvements to production systems.",
+      "h12": "Used Git and Azure DevOps throughout the development and delivery workflow."
+    },
+    "concrete": {
+      "company": "Concrete Quality",
+      "location": "Madrid, Spain",
+      "role": "Full-Stack Concrete Analysis Application Developer",
+      "period": "Jan 2022 – Aug 2023",
+      "h1": "Designed, developed, and maintained a business application used across production plants and construction sites to monitor concrete performance from production through delivery.",
+      "h2": "Developed configurable workflows and customer-specific functionality while maintaining a common application architecture.",
+      "h3": "Implemented complex mathematical and chemical calculations for cement tests, specimens, and quality assurance processes.",
+      "h4": "Developed backend business logic and database-driven functionality supporting laboratory, production, and quality-control workflows.",
+      "h5": "Automated Excel and PDF report generation, reducing manual reporting time by approximately 40% while supporting personalized outputs for different users.",
+      "h6": "Developed responsive and mobile-compatible functionality using Cordova, enabling access to application workflows across different devices.",
+      "h7": "Worked directly with end-users to analyze requirements and improve scheduling, task-management, and operational workflows.",
+      "h8": "Investigated and resolved application issues, ensuring reliable operation for users across different production environments."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "linkedin": "LinkedIn",
+    "cv": "Download CV",
+    "requiredName": "Required (min 2)",
+    "requiredEmail": "Valid email required",
+    "requiredMessage": "Required (min 10)",
+    "thanks": "Thanks! Message sent."
+  }
+}

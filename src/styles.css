@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #00ff41; /* matrix green */
+  --accent-strong: #00cc33; /* darker matrix green */
+  --accent-light: rgb(51, 255, 102); /* lighter variant */
+  --accent-dark: rgb(0, 204, 51); /* darker variant */
+  --accent-rgb: 0, 255, 65; /* RGB values for rgba() usage */
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-[#0b0d10] text-white font-inter antialiased selection:bg-[#00ff41]/20 selection:text-white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-md shadow-glass border border-white/10 rounded-xl;
+  transition: all 0.3s ease;
+}
+
+.glass:hover {
+  border-color: rgba(0, 255, 65, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+.neumorph {
+  box-shadow: 12px 12px 24px rgba(0,0,0,0.55), -12px -12px 24px rgba(255,255,255,0.02);
+}
+
+.btn-accent {
+  @apply inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#00ff41] text-black font-medium shadow-glow transition hover:bg-[#33ff66] hover:shadow-[0_0_30px_rgba(0,255,65,0.55)] focus:outline-none focus:ring-2 focus:ring-[#00ff41]/40;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-accent::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-accent:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 text-white border border-white/10 transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20;
+  position: relative;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+.section {
+  @apply py-20 md:py-28;
+}
+
+.section-title {
+  @apply text-2xl md:text-3xl font-semibold tracking-tight mb-8;
+}
+
+.chip {
+  @apply px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-white/80;
+}
+
+.link-glow {
+  @apply text-[#33ff66] hover:text-[#00ff41] transition;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Terminal/Hacker aesthetic enhancements */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 20px rgba(0, 255, 65, 0.3);
+  transition: text-shadow 0.3s ease;
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.5), 0 0 40px rgba(0, 255, 65, 0.3);
+}
+
+/* Enhanced section title with glow */
+.section-title {
+  animation: text-glow 3s ease-in-out infinite;
+}
+
+.neon-border {
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.1);
+  transition: all 0.3s ease;
+}
+
+.neon-border:hover {
+  border-color: rgba(0, 255, 65, 0.6);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), inset 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+/* Enhanced section animations */
+.section {
+  @apply py-20 md:py-28;
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.section.visible::before {
+  opacity: 1;
+}
+
+/* Terminal-style code lines effect */
+.code-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.code-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+  animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* Glitch effect (subtle) */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-1px, 1px);
+  }
+  40% {
+    transform: translate(-1px, -1px);
+  }
+  60% {
+    transform: translate(1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+}
+
+.glitch-hover:hover {
+  animation: glitch 0.3s ease-in-out;
+}

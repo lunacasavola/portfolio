@@ -1,0 +1,86 @@
+<div class="projects-section">
+  <h2 class="section-title">{{ 'projects.title' | translate }}</h2>
+  <p class="text-white/60 mb-12 text-sm md:text-base max-w-2xl">
+    {{ 'projects.subtitle' | translate }}
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Link Projects -->
+    <div *ngFor="let project of projects; let i = index" class="project-card group fade-in"
+      [class.video-card]="project.type === 'video'">
+      <div
+        class="glass overflow-hidden relative h-full flex flex-col transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(0,255,65,0.25)]">
+
+        <!-- Link Project Content -->
+        <ng-container *ngIf="project.type === 'link'">
+          <!-- <div class="aspect-video bg-gradient-to-br from-[#00ff41]/20 via-[#00cc33]/10 to-[#00aa22]/5 flex items-center justify-center relative overflow-hidden group-hover:from-[#00ff41]/30 group-hover:via-[#00cc33]/20 group-hover:to-[#00aa22]/10 transition-all duration-300"> -->
+          <!-- You can add actual project screenshots here by adding an img tag with [src]="project.imageUrl" -->
+          <!-- <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            <div class="relative z-10 text-center px-4">
+              <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-white/20 group-hover:scale-110 group-hover:border-[#00ff41]/50 transition-all duration-300">
+                <svg class="w-8 h-8 text-[#33ff66] group-hover:text-[#00ff41] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </div>
+            </div>
+          </div> -->
+          <div
+            class="aspect-video bg-gradient-to-br from-[#00ff41]/20 via-[#00cc33]/10 to-[#00aa22]/5 flex items-center justify-center relative overflow-hidden group-hover:from-[#00ff41]/30 group-hover:via-[#00cc33]/20 group-hover:to-[#00aa22]/10 transition-all duration-300">
+
+            <!-- Imagen del proyecto -->
+            <img *ngIf="project.imageUrl" [src]="project.imageUrl" alt="{{ project.name }}"
+              class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+
+            <!-- Overlay oscuro para contraste -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#33ff66] transition-colors">
+              {{ project.name | translate }}
+            </h3>
+            <p class="text-white/60 text-sm mb-4 flex-1">
+              {{ project.description | translate }}
+            </p>
+            <button (click)="openProject(project.url!)"
+              class="btn-ghost w-full justify-center group-hover:border-[#00ff41]/50 group-hover:text-[#33ff66] transition-colors">
+              <span>{{ 'projects.visit' | translate }}</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </button>
+          </div>
+        </ng-container>
+
+        <!-- Video Project Content -->
+        <ng-container *ngIf="project.type === 'video'">
+          <div class="aspect-video relative overflow-hidden bg-black/20">
+            <video #videoElement [src]="project.videoSrc" muted loop playsinline class="w-full h-full object-cover"
+              (error)="handleVideoError($event)"></video>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none">
+            </div>
+            <div class="absolute top-4 right-4">
+              <div class="chip bg-[#00ff41]/20 border-[#00ff41]/30 text-[#33ff66]">
+                <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                {{ 'projects.video' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#33ff66] transition-colors">
+              {{ project.name }}
+            </h3>
+            <p class="text-white/60 text-sm">
+              {{ project.description }}
+            </p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

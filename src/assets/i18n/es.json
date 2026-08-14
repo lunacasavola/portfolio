@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "info": "Info",
+    "summary": "Resumen",
+    "skills": "Tecnologías",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Luna Casavola",
+    "subtitle": "Desarrolladora Full-Stack | .NET • Angular • SQL Server",
+    "cv": "Descargar CV",
+    "linkedin": "LinkedIn"
+  },
+  "info": {
+    "title": "Información General",
+    "age": "Edad",
+    "ageValue": "24",
+    "location": "Ubicación",
+    "locationValue": "Buenos Aires, Argentina",
+    "email": "Correo",
+    "languages": "Idiomas",
+    "languagesValue": "Español (nativo) • Inglés (fluido)",
+    "openToWork": "Disponible",
+    "openToWorkValue": "Sí"
+  },
+  "summary": {
+    "title": "Resumen Profesional",
+    "p1": "Desarrolladora Full-Stack con más de 3 años de experiencia diseñando, desarrollando y manteniendo aplicaciones web empresariales con C#, .NET/.NET Core, Angular, TypeScript, APIs REST y SQL Server. Sólida trayectoria en desarrollo backend, lógica de negocio, aplicaciones basadas en bases de datos e integraciones de sistemas.",
+    "p2": "Experiencia desarrollando productos de software configurables para múltiples clientes, implementando reglas de negocio y funcionalidades específicas de cada cliente mientras se mantiene un núcleo de aplicación compartido. Experiencia práctica con WMS, sistemas de inventario y logística, automatización de almacenes, soporte en producción e integraciones con sistemas y dispositivos externos.",
+    "p3": "Fuertes habilidades de resolución de problemas y depuración, con experiencia trabajando en capas de backend, frontend, base de datos e integración. Cómoda colaborando con stakeholders técnicos y no técnicos, analizando requerimientos y aprendiendo nuevas tecnologías y arquitecturas.",
+    "interestsTitle": "Intereses Profesionales",
+    "interests": "Desarrollo y arquitectura backend, sistemas distribuidos, tecnologías cloud, integraciones de sistemas, optimización de rendimiento, y exploración de nuevas tecnologías y prácticas de desarrollo."
+  },
+  "skills": {
+    "title": "Stack / Tecnologías",
+    "backend": "Backend",
+    "databases": "Bases de datos",
+    "frontend": "Frontend",
+    "mobile": "Desarrollo móvil",
+    "devops": "DevOps y herramientas",
+    "systems": "Sistemas e integraciones",
+    "practices": "Prácticas de ingeniería",
+    "domain": "Dominio"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Vistas previas interactivas de sitios web y proyectos en los que he trabajado.",
+    "visit": "Visitar Sitio",
+    "video": "Video",
+    "stringSistemas": {
+      "name": "String Sistemas",
+      "description": "Software WMS y de logística para operaciones de almacén, inventario y distribución de productos."
+    }
+  },
+  "experience": {
+    "title": "Experiencia Profesional",
+    "string": {
+      "company": "String Sistemas",
+      "location": "Buenos Aires, Argentina",
+      "role": "Desarrolladora Full-Stack de aplicaciones WMS",
+      "period": "Ene 2024 – Sep 2025",
+      "h1": "Desarrollé y mantuve aplicaciones empresariales de Warehouse Management System (WMS) con C#, .NET/.NET Core, Angular, TypeScript, APIs REST y SQL Server.",
+      "h2": "Gestioné y mantuve 9 proyectos WMS de forma simultánea en distintas versiones de Angular y .NET, asegurando estabilidad, compatibilidad y operación confiable en los entornos de cada cliente.",
+      "h3": "Lideré el desarrollo de punta a punta: análisis de requerimientos y modelado de datos en Erwin Data Modeler, desarrollo backend, implementación de base de datos, frontend, despliegue y capacitación de usuarios.",
+      "h4": "Desarrollé un producto WMS configurable para múltiples clientes, implementando parámetros, reglas de negocio y funcionalidades específicas de cada cliente mientras se mantenía un núcleo de aplicación compartido.",
+      "h5": "Diseñé e implementé lógica de negocio backend y operaciones de base de datos para inventario, órdenes, picking y procesos de almacén.",
+      "h6": "Desarrollé y optimicé consultas SQL Server y operaciones T-SQL para flujos críticos de almacén.",
+      "h7": "Construí aplicaciones móviles Ionic para dispositivos handheld Zebra, integrando flujos móviles con la plataforma WMS y las operaciones de almacén.",
+      "h8": "Integré sistemas Pick-to-Light (PTL), impresión de etiquetas ZPL y automatización de clasificadores robóticos con flujos de almacén impulsados por software.",
+      "h9": "Desarrollé un framework interno de BI que permitió a usuarios administrativos crear dashboards y reportes personalizados, reduciendo la dependencia del soporte de IT.",
+      "h10": "Brindé soporte avanzado en producción y resolución de incidentes en tiempo real, diagnosticando problemas en capas de aplicación, base de datos, integración e infraestructura para minimizar la interrupción de las operaciones de almacén.",
+      "h11": "Colaboré con desarrolladores, usuarios y stakeholders de negocio para analizar requerimientos, investigar problemas y entregar mejoras a sistemas en producción.",
+      "h12": "Utilicé Git y Azure DevOps a lo largo del flujo de desarrollo y entrega."
+    },
+    "concrete": {
+      "company": "Concrete Quality",
+      "location": "Madrid, España",
+      "role": "Desarrolladora Full-Stack de aplicación de análisis de hormigón",
+      "period": "Ene 2022 – Ago 2023",
+      "h1": "Diseñé, desarrollé y mantuve una aplicación de negocio utilizada en plantas de producción y obras para monitorear el desempeño del hormigón desde la producción hasta la entrega.",
+      "h2": "Desarrollé flujos configurables y funcionalidades específicas por cliente manteniendo una arquitectura de aplicación común.",
+      "h3": "Implementé cálculos matemáticos y químicos complejos para ensayos de cemento, probetas y procesos de control de calidad.",
+      "h4": "Desarrollé lógica de negocio backend y funcionalidad basada en base de datos para flujos de laboratorio, producción y control de calidad.",
+      "h5": "Automaticé la generación de reportes en Excel y PDF, reduciendo el tiempo de reporte manual en aproximadamente un 40% y permitiendo salidas personalizadas para distintos usuarios.",
+      "h6": "Desarrollé funcionalidad responsive y compatible con móviles usando Cordova, habilitando el acceso a los flujos de la aplicación desde distintos dispositivos.",
+      "h7": "Trabajé de forma directa con usuarios finales para analizar requerimientos y mejorar la planificación, la gestión de tareas y los flujos operativos.",
+      "h8": "Investigué y resolví problemas de la aplicación, asegurando una operación confiable para usuarios en distintos entornos de producción."
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nombre",
+    "email": "Correo",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "linkedin": "LinkedIn",
+    "cv": "Descargar CV",
+    "requiredName": "Obligatorio (mín. 2)",
+    "requiredEmail": "Se requiere un correo válido",
+    "requiredMessage": "Obligatorio (mín. 10)",
+    "thanks": "¡Gracias! Mensaje enviado."
+  }
+}

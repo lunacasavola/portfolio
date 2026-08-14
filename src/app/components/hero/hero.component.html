@@ -1,0 +1,14 @@
+<div class="relative hero-section min-h-[60vh] md:min-h-[70vh]">
+  <app-hero-background></app-hero-background>
+  <div class="relative z-10 flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12 hero-content">
+    <img src="assets/profile.jpg" alt="Profile" class="w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover glass neumorph" onerror="this.style.display='none'" />
+    <div>
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-glow glitch-hover">{{ 'hero.title' | translate }}</h1>
+      <p class="text-white/70 mt-2 code-line">{{ 'hero.subtitle' | translate }}</p>
+      <div class="mt-6 flex gap-3">
+        <a class="btn-accent" href="assets/Luna-Casavola-CV.pdf" download="Luna-Casavola-CV.pdf">{{ 'hero.cv' | translate }}</a>
+        <a class="btn-ghost" href="https://www.linkedin.com/in/lunacasavola" target="_blank" rel="noopener">{{ 'hero.linkedin' | translate }}</a>
+      </div>
+    </div>
+  </div>
+</div>
