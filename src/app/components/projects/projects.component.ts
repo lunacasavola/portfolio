@@ -43,9 +43,9 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
       type: 'link'
     },
     {
-      name: 'Custom Project Video Preview',
-      description: 'Interactive video preview showcasing project capabilities.',
-      videoSrc: 'assets/videos/project-preview.mp4',
+      name: 'Ariane quick preview',
+      description: "Quick tour around Ariane in it's mobile and desktop versions.",
+      videoSrc: 'assets/videos/videoariane.mp4',
       type: 'video'
     }
   ];
