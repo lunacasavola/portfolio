@@ -50,11 +50,14 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
+  
+
   private intersectionObserver?: IntersectionObserver;
   private cardObserver?: IntersectionObserver;
 
   ngOnInit(): void {
     // Component initialization
+    
   }
 
   ngAfterViewInit(): void {
