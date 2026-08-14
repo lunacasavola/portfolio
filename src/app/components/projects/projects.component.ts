@@ -19,7 +19,9 @@ interface Project {
 })
 export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('videoElement', { static: false }) videoElement?: ElementRef<HTMLVideoElement>;
-  
+
+  selectedVideo?: Project;
+
   projects: Project[] = [
     {
       name: 'projects.stringSistemas.name',
@@ -50,14 +52,14 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
-  
+
 
   private intersectionObserver?: IntersectionObserver;
   private cardObserver?: IntersectionObserver;
 
   ngOnInit(): void {
     // Component initialization
-    
+
   }
 
   ngAfterViewInit(): void {
@@ -101,6 +103,14 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.intersectionObserver.observe(video);
+  }
+
+  openVideo(project: Project): void {
+    this.selectedVideo = project;
+  }
+
+  closeVideo(): void {
+    this.selectedVideo = undefined;
   }
 
   private setupCardAnimations(): void {

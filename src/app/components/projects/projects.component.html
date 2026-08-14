@@ -55,20 +55,44 @@
 
         <!-- Video Project Content -->
         <ng-container *ngIf="project.type === 'video'">
-          <div class="aspect-video relative overflow-hidden bg-black/20">
+          <div (click)="openVideo(project)" class="aspect-video relative overflow-hidden bg-black/20 cursor-pointer">
+
             <video #videoElement [src]="project.videoSrc" muted loop playsinline class="w-full h-full object-cover"
-              (error)="handleVideoError($event)"></video>
+              (error)="handleVideoError($event)">
+            </video>
+
+            <!-- Dark gradient -->
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none">
+              class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none">
             </div>
+
+            <!-- Video type -->
             <div class="absolute top-4 right-4">
               <div class="chip bg-[#00ff41]/20 border-[#00ff41]/30 text-[#33ff66]">
                 <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
+
                 {{ 'projects.video' | translate }}
               </div>
             </div>
+
+            <!-- Watch preview -->
+            <div class="absolute bottom-4 left-4">
+              <div class="chip bg-black/60 border-white/20 text-white backdrop-blur-sm
+             group-hover:bg-[#00ff41]/20
+             group-hover:border-[#00ff41]/30
+             group-hover:text-[#33ff66]
+             transition-all duration-300">
+
+                <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+
+                {{ 'projects.watchVideo' | translate }}
+              </div>
+            </div>
+
           </div>
 
           <div class="p-6 flex-1 flex flex-col">
@@ -80,7 +104,31 @@
             </p>
           </div>
         </ng-container>
+
+
       </div>
     </div>
+
+
+    <!-- Video Modal -->
+    <div *ngIf="selectedVideo"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      (click)="closeVideo()">
+      <div class="relative w-full max-w-6xl" (click)="$event.stopPropagation()">
+
+        <!-- Close button -->
+        <button type="button"
+          class="absolute -top-12 right-0 text-white text-3xl hover:text-[#33ff66] transition-colors"
+          (click)="closeVideo()" aria-label="Close video">
+          ×
+        </button>
+
+        <!-- Video -->
+        <video [src]="selectedVideo.videoSrc" controls autoplay playsinline
+          class="w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"></video>
+
+      </div>
+    </div>
+
   </div>
 </div>
