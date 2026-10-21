@@ -1,0 +1,73 @@
+.shelf {
+  border-bottom: 3px solid rgba(255, 255, 255, 0.12);
+}
+
+.bin {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.25s, background-color 0.25s, box-shadow 0.25s, transform 0.15s, opacity 0.3s;
+}
+
+.bin:active { transform: scale(0.96); }
+
+.ptl { background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.08); }
+.ptl-display { color: rgba(255, 255, 255, 0.25); }
+.ptl-light { background: rgba(255, 255, 255, 0.12); }
+
+.bin-lit {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  background: rgba(var(--accent-rgb), 0.08);
+  box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.25);
+}
+.bin-lit .ptl-display { color: var(--accent); text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.8); }
+.bin-lit .ptl-light { background: var(--accent); animation: ptl-pulse 1s ease-in-out infinite; }
+
+.bin-done { opacity: 0.55; }
+.bin-done .ptl-display { color: rgba(var(--accent-rgb), 0.7); }
+
+.bin-error {
+  border-color: rgba(248, 113, 113, 0.8);
+  box-shadow: 0 0 18px rgba(248, 113, 113, 0.35);
+  animation: shake 0.35s;
+}
+.bin-error .ptl-light { background: #f87171; }
+
+@keyframes ptl-pulse {
+  50% { box-shadow: 0 0 10px var(--accent); opacity: 0.6; }
+}
+
+@keyframes shake {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.belt {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 6;
+  stroke-dasharray: 6 4;
+  vector-effect: non-scaling-stroke;
+}
+.belt-active { stroke: rgba(var(--accent-rgb), 0.35); }
+.running .belt { animation: belt-move 0.4s linear infinite; }
+
+@keyframes belt-move {
+  to { stroke-dashoffset: -10; }
+}
+
+.scanner {
+  stroke: rgba(248, 113, 113, 0.3);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.scanning { stroke: #f87171; filter: drop-shadow(0 0 4px #f87171); }
+
+.carton {
+  transform: translate(-50%, -50%);
+  background: #c8995c;
+  border: 1px solid #a57a43;
+  transition-property: left, top;
+  transition-timing-function: ease-in-out;
+}
+
+.log-line:first-child { animation: hero-in 0.3s ease-out; }

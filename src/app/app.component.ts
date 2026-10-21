@@ -11,6 +11,7 @@ import { ExperienceComponent } from './components/experience/experience.componen
 import { ContactComponent } from './components/contact/contact.component';
 import { AnimatedBackgroundComponent } from './components/animated-background/animated-background.component';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { WmsSimComponent } from './components/wms-sim/wms-sim.component';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ import { ColorPickerComponent } from './components/color-picker/color-picker.com
     ExperienceComponent,
     ContactComponent,
     AnimatedBackgroundComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    WmsSimComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

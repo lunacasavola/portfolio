@@ -1,0 +1,202 @@
+<h2 class="section-title" appReveal>{{ 'wms.title' | translate }}</h2>
+<p class="text-white/60 mb-10 text-sm md:text-base max-w-2xl" appReveal [revealDelay]="80">
+  {{ 'wms.subtitle' | translate }}
+</p>
+
+<div appReveal [revealDelay]="160">
+  <div class="glass p-4 md:p-6 grid lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] gap-6">
+
+    <!-- Handheld: order, stats and event log -->
+    <div class="handheld rounded-2xl border border-white/10 bg-black/40 p-4 flex flex-col gap-4 min-w-0">
+      <div class="flex items-center justify-between font-mono text-[11px] text-white/50">
+        <span>{{ 'wms.device' | translate }}</span>
+        <span class="chip !px-2 !py-0.5 text-[11px]"
+          [ngClass]="{
+            'chip-active': phase === 'picking' || phase === 'sorting',
+            '!text-accent-400 !border-accent/40': phase === 'done'
+          }">
+          {{ 'wms.status.' + phase | translate }}
+        </span>
+      </div>
+
+      <!-- Idle -->
+      <div *ngIf="phase === 'idle'" class="flex-1 flex flex-col items-start justify-center gap-4 py-6">
+        <p class="text-sm text-white/70">{{ 'wms.idleHint' | translate }}</p>
+        <button type="button" class="btn-accent" (click)="startOrder()">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          {{ 'wms.start' | translate }}
+        </button>
+      </div>
+
+      <!-- Active order -->
+      <ng-container *ngIf="phase !== 'idle'">
+        <div class="flex items-end justify-between gap-3">
+          <div>
+            <div class="text-[11px] uppercase tracking-wider text-white/40">{{ 'wms.order' | translate }}</div>
+            <div class="font-mono text-xl text-white">#{{ orderId }}</div>
+          </div>
+          <div class="text-right">
+            <div class="text-[11px] uppercase tracking-wider text-white/40">{{ 'wms.destination' | translate }}</div>
+            <div class="font-mono text-xl text-accent-400">{{ route.code }}</div>
+          </div>
+        </div>
+
+        <ul class="space-y-2">
+          <li *ngFor="let line of lines"
+            class="flex items-center gap-3 rounded-lg border px-3 py-2 transition-colors duration-300"
+            [ngClass]="line.picked === line.qty ? 'border-accent/30 bg-accent/5' : 'border-white/10 bg-white/[0.03]'">
+            <span class="text-xl" aria-hidden="true">{{ line.bin.product.icon }}</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm truncate">{{ 'wms.products.' + line.bin.product.key | translate }}</div>
+              <div class="font-mono text-[11px] text-white/40">{{ line.bin.id }}</div>
+            </div>
+            <span class="font-mono text-sm" [ngClass]="line.picked === line.qty ? 'text-accent-400' : 'text-white/70'">
+              {{ line.picked }}/{{ line.qty }}
+            </span>
+          </li>
+        </ul>
+
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="rounded-lg bg-white/[0.03] border border-white/10 py-2">
+            <div class="font-mono text-lg">{{ elapsed | number: '1.1-1' }}s</div>
+            <div class="text-[10px] uppercase tracking-wider text-white/40">{{ 'wms.time' | translate }}</div>
+          </div>
+          <div class="rounded-lg bg-white/[0.03] border border-white/10 py-2">
+            <div class="font-mono text-lg">{{ units }}/{{ totalUnits }}</div>
+            <div class="text-[10px] uppercase tracking-wider text-white/40">{{ 'wms.units' | translate }}</div>
+          </div>
+          <div class="rounded-lg bg-white/[0.03] border border-white/10 py-2">
+            <div class="font-mono text-lg" [ngClass]="{ 'text-red-400': errors > 0 }">{{ errors }}</div>
+            <div class="text-[10px] uppercase tracking-wider text-white/40">{{ 'wms.errors' | translate }}</div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Event log -->
+      <div class="flex-1 flex flex-col">
+        <div class="text-[11px] uppercase tracking-wider text-white/40 mb-1">{{ 'wms.log' | translate }}</div>
+        <!-- h-0 + flex-grow: fills the leftover height without stretching the layout -->
+        <div class="flex-grow h-0 min-h-[7rem] overflow-y-auto rounded-lg bg-black/50 border border-white/5 p-2 font-mono text-[11px] leading-relaxed">
+          <div *ngIf="log.length === 0" class="text-white/30">$ waiting for orders<span class="animate-blink">_</span></div>
+          <div *ngFor="let entry of log" class="log-line truncate"
+            [ngClass]="{ 'text-accent-400': entry.level === 'ok', 'text-red-400': entry.level === 'warn', 'text-white/60': entry.level === 'info' }">
+            <span class="text-white/30">{{ entry.time }}</span> {{ entry.text }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floor: rack + conveyor -->
+    <div class="min-w-0 flex flex-col gap-6">
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <div class="text-sm font-mono text-accent-400">{{ 'wms.rack' | translate }}</div>
+          <div class="text-xs text-red-400 transition-opacity duration-300" [class.opacity-0]="!wrongBinFlash">
+            {{ 'wms.wrongBin' | translate }}
+          </div>
+        </div>
+        <p *ngIf="phase === 'picking'" class="text-xs text-white/50 mb-3">{{ 'wms.instructions' | translate }}</p>
+
+        <div class="space-y-3">
+          <div *ngFor="let level of levels" class="shelf grid grid-cols-4 gap-2 sm:gap-3 pb-3">
+            <button *ngFor="let bay of bays; let b = index" type="button"
+              class="bin group relative rounded-xl border p-2 sm:p-3 flex flex-col items-center gap-1.5 text-center"
+              [ngClass]="{
+                'bin-lit': binAt(level, bay).lit,
+                'bin-done': binAt(level, bay).done,
+                'bin-error': binAt(level, bay).error,
+                'cursor-default': phase !== 'picking'
+              }"
+              [attr.aria-label]="binAt(level, bay).id"
+              (click)="pick(binAt(level, bay))">
+              <span class="text-2xl sm:text-3xl leading-none select-none" aria-hidden="true">{{ binAt(level, bay).product.icon }}</span>
+              <span class="font-mono text-[9px] sm:text-[10px] text-white/40">{{ binAt(level, bay).id }}</span>
+              <!-- PTL module: display + confirm light -->
+              <span class="ptl flex items-center gap-1.5 rounded-md px-1.5 py-0.5">
+                <span class="ptl-display font-mono text-xs sm:text-sm w-6 text-center">
+                  {{ binAt(level, bay).lit ? binAt(level, bay).remaining : (binAt(level, bay).done ? 'OK' : '--') }}
+                </span>
+                <span class="ptl-light w-2.5 h-2.5 rounded-full"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conveyor & sorter -->
+      <div>
+        <div class="text-sm font-mono text-accent-400 mb-3">{{ 'wms.conveyor' | translate }}</div>
+        <div class="conveyor relative h-40 rounded-xl border border-white/10 bg-black/30 overflow-hidden"
+          [class.running]="phase === 'sorting'">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <!-- main belt -->
+            <line x1="0" y1="50" x2="58" y2="50" class="belt" />
+            <!-- sorter branches -->
+            <path *ngFor="let y of laneY" [attr.d]="'M58 50 L66 ' + y + ' L100 ' + y" class="belt"
+              [class.belt-active]="phase !== 'idle' && y === laneY[route.lane]" />
+            <!-- scanner -->
+            <line x1="40" y1="30" x2="40" y2="70" class="scanner" [class.scanning]="scanning" />
+          </svg>
+
+          <span class="absolute font-mono text-[10px] text-white/40" style="left: 40%; top: 14%; transform: translateX(-50%)">SCAN</span>
+          <span *ngFor="let r of routes" class="absolute right-2 font-mono text-[10px] -translate-y-full"
+            [style.top.%]="laneY[r.lane] - 3"
+            [ngClass]="phase !== 'idle' && r === route ? 'text-accent-400' : 'text-white/40'">
+            {{ r.code }}
+          </span>
+
+          <!-- carton -->
+          <div *ngIf="boxVisible" class="carton absolute w-10 h-8 rounded-[4px]"
+            [style.left.%]="box.x" [style.top.%]="box.y"
+            [style.transition-duration.ms]="box.duration">
+            <span class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-2 bg-[#e8c48f]/80"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Result: label + ZPL (full width, so the handheld column doesn't stretch) -->
+    <div *ngIf="phase === 'done'" class="lg:col-span-2">
+      <div class="hero-in grid md:grid-cols-2 gap-4 lg:gap-6">
+        <div>
+          <div class="text-sm font-mono text-accent-400 mb-3">{{ 'wms.label' | translate }}</div>
+          <div class="label-print bg-white text-black rounded-md p-4 font-mono text-[11px] leading-tight shadow-glow max-w-sm">
+            <div class="flex justify-between border-b-2 border-black pb-2 mb-2">
+              <span class="font-bold">LUNA CASAVOLA WMS</span>
+              <span>#{{ orderId }}</span>
+            </div>
+            <div class="text-[10px] text-black/60">{{ 'wms.shipTo' | translate | uppercase }}</div>
+            <div class="text-base font-bold truncate">{{ recipient | uppercase }}</div>
+            <div class="flex items-end justify-between mt-2">
+              <div class="text-4xl font-black tracking-tight">{{ route.code }}</div>
+              <div class="text-right text-[10px]">{{ route.name }}<br>{{ totalUnits }} UN · {{ elapsed | number: '1.1-1' }}s</div>
+            </div>
+            <div class="flex items-stretch h-12 mt-3" aria-hidden="true">
+              <span *ngFor="let w of barcode; let i = index" [style.width.px]="w * 1.5"
+                [ngClass]="i % 2 === 0 ? 'bg-black' : 'bg-transparent'"></span>
+            </div>
+            <div class="text-center tracking-[0.3em] mt-1">{{ orderId }}</div>
+          </div>
+          <label class="block mt-3">
+            <span class="text-xs text-white/50">{{ 'wms.shipTo' | translate }}</span>
+            <input class="input-field block mt-1 text-sm max-w-sm" maxlength="24" [(ngModel)]="shipTo"
+              [placeholder]="'wms.namePlaceholder' | translate" />
+          </label>
+        </div>
+
+        <div class="flex flex-col min-w-0">
+          <div class="text-sm font-mono text-accent-400 mb-3">{{ 'wms.zpl' | translate }}</div>
+          <pre class="flex-1 rounded-md bg-black/60 border border-white/10 p-3 font-mono text-[11px] text-accent-400/90 overflow-x-auto">{{ zpl }}</pre>
+          <div class="mt-4 rounded-lg border border-accent/30 bg-accent/5 p-3">
+            <div class="text-sm">{{ resultKey | translate }}</div>
+            <div class="font-mono text-xs text-white/50 mt-1">
+              {{ 'wms.time' | translate }} {{ elapsed | number: '1.1-1' }}s · {{ 'wms.accuracy' | translate }} {{ accuracy }}%
+            </div>
+          </div>
+          <button type="button" class="btn-accent mt-4 self-start" (click)="startOrder()">{{ 'wms.newOrder' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

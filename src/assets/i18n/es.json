@@ -5,6 +5,7 @@
     "summary": "Resumen",
     "skills": "Tecnologías",
     "projects": "Proyectos",
+    "wms": "Demo WMS",
     "experience": "Experiencia",
     "contact": "Contacto"
   },
@@ -54,6 +55,67 @@
     "stringSistemas": {
       "name": "String Sistemas",
       "description": "Software WMS y de logística para operaciones de almacén, inventario y distribución de productos."
+    },
+    "concreteQuality": {
+      "name": "Concrete Quality",
+      "description": "Plataforma SaaS industrial para la producción y el control de calidad del hormigón."
+    },
+    "hippieHouse": {
+      "name": "Hippie House TV",
+      "description": "Sitio web de un estudio creativo y productora audiovisual."
+    },
+    "ariane": {
+      "name": "Ariane: vista rápida",
+      "description": "Un recorrido rápido por Ariane en sus versiones mobile y desktop."
+    }
+  },
+  "wms": {
+    "title": "Probá mi WMS",
+    "subtitle": "Desarrollo software para depósitos: pick-to-light, sorters robóticos, handhelds Zebra y etiquetas ZPL. En vez de contártelo, prepará un pedido vos.",
+    "device": "WMS · HANDHELD",
+    "idleHint": "Hay un pedido esperando ser liberado al depósito.",
+    "start": "Liberar pedido",
+    "newOrder": "Nuevo pedido",
+    "order": "Pedido",
+    "destination": "Ruta",
+    "instructions": "Hacé clic en los casilleros encendidos para pickear cada unidad. El display muestra cuántas faltan.",
+    "time": "Tiempo",
+    "units": "Unidades",
+    "errors": "Errores",
+    "accuracy": "Precisión",
+    "log": "Log de eventos",
+    "rack": "Estantería pick-to-light",
+    "conveyor": "Cinta y sorter",
+    "label": "Etiqueta de envío",
+    "zpl": "ZPL enviado a la impresora",
+    "shipTo": "Enviar a",
+    "namePlaceholder": "Tu nombre",
+    "defaultName": "Recruiter",
+    "wrongBin": "¡Casillero equivocado!",
+    "status": {
+      "idle": "En espera",
+      "picking": "Picking",
+      "sorting": "Clasificando",
+      "done": "Despachado"
+    },
+    "result": {
+      "fast": "Velocidad de picker senior. Quedaste contratado/a 😎",
+      "ok": "Buen turno. El depósito está orgulloso.",
+      "slow": "¡Despachado! Ese café estuvo bien merecido ☕"
+    },
+    "products": {
+      "keyboard": "Teclado mecánico",
+      "coffee": "Café en grano",
+      "duck": "Patito de goma",
+      "monitor": "Monitor",
+      "headphones": "Auriculares",
+      "mug": "Taza",
+      "stickers": "Pack de stickers",
+      "cable": "Cable USB-C",
+      "plant": "Plantita",
+      "notebook": "Cuaderno",
+      "mouse": "Mouse",
+      "pizza": "Pizza (noche de deploy)"
     }
   },
   "experience": {

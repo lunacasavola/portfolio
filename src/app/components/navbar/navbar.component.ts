@@ -19,6 +19,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     { id: 'hero', key: 'nav.home' },
     { id: 'summary', key: 'nav.summary' },
     { id: 'projects', key: 'nav.projects' },
+    { id: 'wms', key: 'nav.wms' },
     { id: 'skills', key: 'nav.skills' },
     { id: 'experience', key: 'nav.experience' },
     { id: 'info', key: 'nav.info' },

@@ -5,6 +5,7 @@
     "summary": "Summary",
     "skills": "Skills",
     "projects": "Projects",
+    "wms": "WMS Demo",
     "experience": "Experience",
     "contact": "Contact"
   },
@@ -54,6 +55,67 @@
     "stringSistemas": {
       "name": "String Sistemas",
       "description": "WMS and logistics software for warehouse operations, inventory, and product distribution."
+    },
+    "concreteQuality": {
+      "name": "Concrete Quality",
+      "description": "Industrial SaaS platform for concrete production and quality control."
+    },
+    "hippieHouse": {
+      "name": "Hippie House TV",
+      "description": "Creative studio and audiovisual production website."
+    },
+    "ariane": {
+      "name": "Ariane quick preview",
+      "description": "Quick tour around Ariane in its mobile and desktop versions."
+    }
+  },
+  "wms": {
+    "title": "Try my WMS",
+    "subtitle": "I build warehouse software: pick-to-light, robotic sorters, Zebra handhelds and ZPL labels. Instead of telling you about it, pick an order yourself.",
+    "device": "WMS · HANDHELD",
+    "idleHint": "An order is waiting to be released to the warehouse floor.",
+    "start": "Release order",
+    "newOrder": "New order",
+    "order": "Order",
+    "destination": "Route",
+    "instructions": "Click the lit bins to pick each unit. The display shows how many are left.",
+    "time": "Time",
+    "units": "Units",
+    "errors": "Errors",
+    "accuracy": "Accuracy",
+    "log": "Event log",
+    "rack": "Pick-to-light rack",
+    "conveyor": "Conveyor & sorter",
+    "label": "Shipping label",
+    "zpl": "ZPL sent to the printer",
+    "shipTo": "Ship to",
+    "namePlaceholder": "Your name",
+    "defaultName": "Recruiter",
+    "wrongBin": "Wrong bin!",
+    "status": {
+      "idle": "Idle",
+      "picking": "Picking",
+      "sorting": "Sorting",
+      "done": "Shipped"
+    },
+    "result": {
+      "fast": "Senior picker speed. You're hired 😎",
+      "ok": "Solid shift. The warehouse is proud of you.",
+      "slow": "Shipped! That coffee break was well deserved ☕"
+    },
+    "products": {
+      "keyboard": "Mechanical keyboard",
+      "coffee": "Coffee beans",
+      "duck": "Rubber duck",
+      "monitor": "Monitor",
+      "headphones": "Headphones",
+      "mug": "Mug",
+      "stickers": "Sticker pack",
+      "cable": "USB-C cable",
+      "plant": "Desk plant",
+      "notebook": "Notebook",
+      "mouse": "Mouse",
+      "pizza": "Pizza (deploy night)"
     }
   },
   "experience": {

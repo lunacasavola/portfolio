@@ -32,22 +32,22 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
       type: 'link'
     },
     {
-      name: 'Concrete Quality',
-      description: 'Industrial SaaS platform for concrete production and quality control.',
+      name: 'projects.concreteQuality.name',
+      description: 'projects.concreteQuality.description',
       url: 'https://www.concrete-quality.com/',
       imageUrl: 'assets/images/cq.png',
       type: 'link'
     },
     {
-      name: 'Hippie House TV',
-      description: 'Creative studio and audiovisual production website.',
+      name: 'projects.hippieHouse.name',
+      description: 'projects.hippieHouse.description',
       url: 'https://www.hippiehouse.tv/index.html',
       imageUrl: 'assets/images/hh.png',
       type: 'link'
     },
     {
-      name: 'Ariane quick preview',
-      description: "Quick tour around Ariane in it's mobile and desktop versions.",
+      name: 'projects.ariane.name',
+      description: 'projects.ariane.description',
       videoSrc: 'assets/videos/videoariane.mp4',
       type: 'video'
     }

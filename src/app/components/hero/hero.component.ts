@@ -10,6 +10,8 @@ import { HeroBackgroundComponent } from '../hero-background/hero-background.comp
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.css'
 })
-export class HeroComponent {}
+export class HeroComponent {
+  photoMissing = false;
+}
 
 
