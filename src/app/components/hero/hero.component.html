@@ -1,14 +1,43 @@
-<div class="relative hero-section min-h-[60vh] md:min-h-[70vh]">
+<div class="hero-section relative flex items-center min-h-[calc(100svh-10rem)] md:min-h-[calc(100svh-11rem)]">
   <app-hero-background></app-hero-background>
-  <div class="relative z-10 flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12 hero-content">
-    <img src="assets/profile.jpg" alt="Profile" class="w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover glass neumorph" onerror="this.style.display='none'" />
+
+  <div class="relative z-10 w-full flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12 text-center md:text-left">
+    <img src="assets/profile.jpg" alt="Luna Casavola"
+      class="hero-in w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover glass neumorph"
+      onerror="this.style.display='none'" />
+
     <div>
-      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-glow glitch-hover">{{ 'hero.title' | translate }}</h1>
-      <p class="text-white/70 mt-2 code-line">{{ 'hero.subtitle' | translate }}</p>
-      <div class="mt-6 flex gap-3">
-        <a class="btn-accent" href="assets/Luna-Casavola-CV.pdf" download="Luna-Casavola-CV.pdf">{{ 'hero.cv' | translate }}</a>
-        <a class="btn-ghost" href="https://www.linkedin.com/in/lunacasavola" target="_blank" rel="noopener">{{ 'hero.linkedin' | translate }}</a>
+      <p class="hero-in font-mono text-sm text-accent-400 mb-3" style="animation-delay: 0.1s">
+        &lt;hello world /&gt;
+      </p>
+      <h1 class="hero-in text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-glow glitch-hover"
+        style="animation-delay: 0.2s">
+        {{ 'hero.title' | translate }}
+      </h1>
+      <p class="hero-in text-white/70 mt-3 md:text-lg code-line inline-block" style="animation-delay: 0.35s">
+        {{ 'hero.subtitle' | translate }}<span class="inline-block w-2 h-[1.1em] ml-1 align-[-0.15em] bg-accent animate-blink"></span>
+      </p>
+      <div class="hero-in mt-8 flex flex-wrap justify-center md:justify-start gap-3" style="animation-delay: 0.5s">
+        <a class="btn-accent" href="assets/Luna-Casavola-CV.pdf" download="Luna-Casavola-CV.pdf">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          {{ 'hero.cv' | translate }}
+        </a>
+        <a class="btn-ghost" href="https://www.linkedin.com/in/lunacasavola" target="_blank" rel="noopener">
+          {{ 'hero.linkedin' | translate }}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </a>
       </div>
     </div>
   </div>
+
+  <a href="#summary" class="hero-in absolute bottom-0 inset-x-0 mx-auto w-fit z-10 hidden md:flex flex-col items-center gap-2 text-white/40 hover:text-accent-400 transition-colors"
+    style="animation-delay: 1s" aria-label="Scroll down">
+    <span class="w-5 h-8 rounded-full border border-current flex justify-center pt-1.5">
+      <span class="w-1 h-1.5 rounded-full bg-current animate-scroll-hint"></span>
+    </span>
+  </a>
 </div>

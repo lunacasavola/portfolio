@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,13 +8,35 @@ import { CommonModule } from '@angular/common';
   templateUrl: './animated-background.component.html',
   styleUrl: './animated-background.component.css'
 })
-export class AnimatedBackgroundComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AnimatedBackgroundComponent implements AfterViewInit, OnDestroy {
   @ViewChild('canvas', { static: false }) canvasRef?: ElementRef<HTMLCanvasElement>;
-  
+
   private animationFrameId?: number;
   private particles: Particle[] = [];
-  private readonly particleCount = 50;
   private ctx?: CanvasRenderingContext2D;
+  private width = 0;
+  private height = 0;
+  private accentColor = '#00ff41';
+  private lastTime = 0;
+  private reducedMotion = false;
+  private colorObserver?: MutationObserver;
+  private readonly linkDistance = 150;
+
+  private readonly onResize = () => {
+    this.resizeCanvas();
+    this.initParticles();
+    if (this.reducedMotion) this.draw();
+  };
+
+  private readonly onVisibilityChange = () => {
+    if (document.hidden) {
+      this.stop();
+    } else if (!this.reducedMotion) {
+      this.start();
+    }
+  };
+
+  constructor(private zone: NgZone) {}
 
   ngAfterViewInit(): void {
     const canvas = this.canvasRef?.nativeElement;
@@ -23,112 +45,139 @@ export class AnimatedBackgroundComponent implements OnInit, AfterViewInit, OnDes
     this.ctx = canvas.getContext('2d') || undefined;
     if (!this.ctx) return;
 
-    // Set canvas size
+    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.readAccentColor();
     this.resizeCanvas();
-    window.addEventListener('resize', () => this.resizeCanvas());
-
-    // Initialize particles
     this.initParticles();
-    
-    // Start animation
-    this.animate();
 
-    // Listen for color changes
-    const observer = new MutationObserver(() => {
-      // Colors will be read from CSS in animate loop
+    // Read the accent color once per change instead of on every frame
+    this.colorObserver = new MutationObserver(() => {
+      this.readAccentColor();
+      if (this.reducedMotion) this.draw();
     });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['style']
-    });
-  }
+    this.colorObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
 
-  ngOnInit(): void {
-    // Component initialization
+    // The animation loop doesn't touch Angular state, so keep it out of change detection
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('resize', this.onResize, { passive: true });
+      document.addEventListener('visibilitychange', this.onVisibilityChange);
+      if (this.reducedMotion) {
+        this.draw();
+      } else {
+        this.start();
+      }
+    });
   }
 
   ngOnDestroy(): void {
+    this.stop();
+    this.colorObserver?.disconnect();
+    window.removeEventListener('resize', this.onResize);
+    document.removeEventListener('visibilitychange', this.onVisibilityChange);
+  }
+
+  private start(): void {
+    if (this.animationFrameId) return;
+    this.lastTime = performance.now();
+    const loop = (now: number) => {
+      // Normalize to 60fps so speed is the same on 120/144Hz screens
+      const dt = Math.min((now - this.lastTime) / 16.667, 3);
+      this.lastTime = now;
+      this.update(dt);
+      this.draw();
+      this.animationFrameId = requestAnimationFrame(loop);
+    };
+    this.animationFrameId = requestAnimationFrame(loop);
+  }
+
+  private stop(): void {
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = undefined;
     }
-    window.removeEventListener('resize', () => this.resizeCanvas());
+  }
+
+  private readAccentColor(): void {
+    this.accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00ff41';
   }
 
   private resizeCanvas(): void {
     const canvas = this.canvasRef?.nativeElement;
-    if (!canvas) return;
+    if (!canvas || !this.ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    canvas.width = this.width * dpr;
+    canvas.height = this.height * dpr;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
   private initParticles(): void {
-    const canvas = this.canvasRef?.nativeElement;
-    if (!canvas) return;
+    // Scale particle count with screen area so mobile isn't crowded
+    const count = Math.round(Math.min(70, Math.max(25, (this.width * this.height) / 22000)));
 
     this.particles = [];
-    for (let i = 0; i < this.particleCount; i++) {
+    for (let i = 0; i < count; i++) {
       this.particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * this.width,
+        y: Math.random() * this.height,
         radius: Math.random() * 1.5 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.3 + 0.1
+        speedX: (Math.random() - 0.5) * 0.4,
+        speedY: (Math.random() - 0.5) * 0.4,
+        opacity: Math.random() * 0.4 + 0.2
       });
     }
   }
 
-  private animate(): void {
-    if (!this.ctx) return;
-
-    const canvas = this.canvasRef?.nativeElement;
-    if (!canvas) return;
-
-    // Clear canvas
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Update and draw particles
-    this.particles.forEach((particle, i) => {
-      // Update position
-      particle.x += particle.speedX;
-      particle.y += particle.speedY;
+  private update(dt: number): void {
+    for (const p of this.particles) {
+      p.x += p.speedX * dt;
+      p.y += p.speedY * dt;
 
       // Wrap around edges
-      if (particle.x < 0) particle.x = canvas.width;
-      if (particle.x > canvas.width) particle.x = 0;
-      if (particle.y < 0) particle.y = canvas.height;
-      if (particle.y > canvas.height) particle.y = 0;
+      if (p.x < 0) p.x += this.width;
+      else if (p.x > this.width) p.x -= this.width;
+      if (p.y < 0) p.y += this.height;
+      else if (p.y > this.height) p.y -= this.height;
+    }
+  }
 
-      // Draw particle - use CSS variable for color
-      const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00ff41';
-      this.ctx!.globalAlpha = particle.opacity;
-      this.ctx!.fillStyle = accentColor;
-      this.ctx!.beginPath();
-      this.ctx!.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-      this.ctx!.fill();
+  private draw(): void {
+    const ctx = this.ctx;
+    if (!ctx) return;
 
-      // Draw connections to nearby particles
-      this.particles.slice(i + 1).forEach(otherParticle => {
-        const dx = particle.x - otherParticle.x;
-        const dy = particle.y - otherParticle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    ctx.clearRect(0, 0, this.width, this.height);
+    ctx.fillStyle = this.accentColor;
+    ctx.strokeStyle = this.accentColor;
+    ctx.lineWidth = 0.6;
 
-        if (distance < 150) {
-          this.ctx!.globalAlpha = (1 - distance / 150) * 0.1;
-          this.ctx!.strokeStyle = accentColor;
-          this.ctx!.lineWidth = 0.5;
-          this.ctx!.beginPath();
-          this.ctx!.moveTo(particle.x, particle.y);
-          this.ctx!.lineTo(otherParticle.x, otherParticle.y);
-          this.ctx!.stroke();
+    const maxDistSq = this.linkDistance * this.linkDistance;
+
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+
+      for (let j = i + 1; j < this.particles.length; j++) {
+        const o = this.particles[j];
+        const dx = p.x - o.x;
+        const dy = p.y - o.y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < maxDistSq) {
+          ctx.globalAlpha = (1 - Math.sqrt(distSq) / this.linkDistance) * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(o.x, o.y);
+          ctx.stroke();
         }
-      });
-    });
+      }
 
-    this.ctx.globalAlpha = 1;
+      ctx.globalAlpha = p.opacity;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
-    this.animationFrameId = requestAnimationFrame(() => this.animate());
+    ctx.globalAlpha = 1;
   }
 }
 
@@ -140,4 +189,3 @@ interface Particle {
   speedY: number;
   opacity: number;
 }
-

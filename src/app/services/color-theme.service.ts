@@ -15,7 +15,7 @@ export class ColorThemeService {
 
   private getStoredColor(): string {
     const stored = localStorage.getItem('accentColor');
-    return stored || this.defaultColor;
+    return stored && /^#[0-9a-f]{6}$/i.test(stored) ? stored : this.defaultColor;
   }
 
   setColor(color: string): void {
@@ -35,23 +35,20 @@ export class ColorThemeService {
     const b = parseInt(color.slice(5, 7), 16);
 
     // Calculate lighter and darker variants
-    const lightR = Math.min(255, Math.floor(r + (255 - r) * 0.3));
-    const lightG = Math.min(255, Math.floor(g + (255 - g) * 0.3));
-    const lightB = Math.min(255, Math.floor(b + (255 - b) * 0.3));
-
-    const darkR = Math.max(0, Math.floor(r * 0.8));
-    const darkG = Math.max(0, Math.floor(g * 0.8));
-    const darkB = Math.max(0, Math.floor(b * 0.8));
+    const light = [r, g, b].map(c => Math.min(255, Math.floor(c + (255 - c) * 0.3)));
+    const dark = [r, g, b].map(c => Math.max(0, Math.floor(c * 0.8)));
 
     // Set CSS custom properties
-    document.documentElement.style.setProperty('--accent', color);
-    document.documentElement.style.setProperty('--accent-light', `rgb(${lightR}, ${lightG}, ${lightB})`);
-    document.documentElement.style.setProperty('--accent-dark', `rgb(${darkR}, ${darkG}, ${darkB})`);
-    document.documentElement.style.setProperty('--accent-rgb', `${r}, ${g}, ${b}`);
+    const style = document.documentElement.style;
+    style.setProperty('--accent', color);
+    style.setProperty('--accent-light', `rgb(${light.join(', ')})`);
+    style.setProperty('--accent-dark', `rgb(${dark.join(', ')})`);
+    style.setProperty('--accent-rgb', `${r}, ${g}, ${b}`);
+    style.setProperty('--accent-light-rgb', light.join(', '));
+    style.setProperty('--accent-dark-rgb', dark.join(', '));
   }
 
   resetToDefault(): void {
     this.setColor(this.defaultColor);
   }
 }
-

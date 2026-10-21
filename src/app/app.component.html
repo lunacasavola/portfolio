@@ -1,10 +1,10 @@
-<div class="relative">
+<div class="app-root">
   <app-animated-background></app-animated-background>
   <app-navbar></app-navbar>
   <app-color-picker></app-color-picker>
 
-  <main class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
-    <section id="hero" class="section">
+  <main class="max-w-6xl mx-auto px-4 md:px-6">
+    <section id="hero" class="section !pt-28 !pb-12 md:!pt-32">
       <app-hero></app-hero>
     </section>
 
@@ -15,7 +15,7 @@
     <section id="projects" class="section">
       <app-projects></app-projects>
     </section>
-    
+
     <section id="skills" class="section">
       <app-skills></app-skills>
     </section>
@@ -32,6 +32,8 @@
       <app-contact></app-contact>
     </section>
   </main>
+
+  <footer class="relative z-10 border-t border-white/5 py-8 text-center text-xs text-white/40 font-mono">
+    &copy; {{ year }} Luna Casavola
+  </footer>
 </div>
-
-

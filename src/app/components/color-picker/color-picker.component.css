@@ -15,14 +15,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 16px rgba(var(--accent-rgb), 0.35);
 }
 
 .color-picker-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transform: scale(1.1) rotate(-12deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 24px rgba(var(--accent-rgb), 0.5);
   border-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -46,8 +45,9 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+  transform: translateY(10px) scale(0.96);
+  transform-origin: bottom right;
+  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
   pointer-events: none;
 }
 

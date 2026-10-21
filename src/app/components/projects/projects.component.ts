@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 interface Project {
   name: string;
@@ -14,10 +15,10 @@ interface Project {
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, RevealDirective],
   templateUrl: './projects.component.html'
 })
-export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProjectsComponent implements AfterViewInit, OnDestroy {
   @ViewChild('videoElement', { static: false }) videoElement?: ElementRef<HTMLVideoElement>;
 
   selectedVideo?: Project;
@@ -52,54 +53,38 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
-
-
   private intersectionObserver?: IntersectionObserver;
-  private cardObserver?: IntersectionObserver;
-
-  ngOnInit(): void {
-    // Component initialization
-
-  }
 
   ngAfterViewInit(): void {
-    // Set up Intersection Observer for video pause/play
-    setTimeout(() => {
-      if (this.videoElement?.nativeElement) {
-        this.setupVideoObserver();
-      }
-      this.setupCardAnimations();
-    }, 100);
+    this.setupVideoObserver();
   }
 
   ngOnDestroy(): void {
-    if (this.intersectionObserver) {
-      this.intersectionObserver.disconnect();
-    }
-    if (this.cardObserver) {
-      this.cardObserver.disconnect();
-    }
+    this.intersectionObserver?.disconnect();
+    this.setScrollLock(false);
   }
 
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.selectedVideo) this.closeVideo();
+  }
+
+  // Play the preview only while it's on screen
   private setupVideoObserver(): void {
     const video = this.videoElement?.nativeElement;
     if (!video) return;
 
     this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.play().catch(() => {
-              // Autoplay was prevented, which is fine
-            });
-          } else {
-            video.pause();
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting && !this.selectedVideo) {
+          video.play().catch(() => {
+            // Autoplay was prevented, which is fine
+          });
+        } else {
+          video.pause();
+        }
       },
-      {
-        threshold: 0.5 // Trigger when 50% of video is visible
-      }
+      { threshold: 0.5 }
     );
 
     this.intersectionObserver.observe(video);
@@ -107,42 +92,17 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openVideo(project: Project): void {
     this.selectedVideo = project;
+    this.videoElement?.nativeElement.pause();
+    this.setScrollLock(true);
   }
 
   closeVideo(): void {
     this.selectedVideo = undefined;
+    this.setScrollLock(false);
+    this.videoElement?.nativeElement.play().catch(() => {});
   }
 
-  private setupCardAnimations(): void {
-    const cards = document.querySelectorAll('.project-card');
-    if (cards.length === 0) return;
-
-    this.cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
-
-    cards.forEach((card) => {
-      this.cardObserver?.observe(card);
-    });
-  }
-
-  openProject(url: string): void {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
-
-  handleVideoError(event: Event): void {
-    // Silently handle video load errors - video is optional
-    // The component gracefully handles missing video files
+  private setScrollLock(locked: boolean): void {
+    document.body.style.overflow = locked ? 'hidden' : '';
   }
 }
-

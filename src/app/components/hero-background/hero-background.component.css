@@ -1,23 +1,25 @@
+/* Full-bleed layer behind the hero, faded out at the edges so shapes never get cut off hard */
 .hero-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: -8rem;
+  bottom: -6rem;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 70%, transparent 100%);
 }
 
-.hero-background canvas {
+.hero-background ::ng-deep canvas {
   display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: fade-in 1.5s ease-out forwards;
+  width: 100% !important;
+  height: 100% !important;
+  animation: hero-bg-in 2s ease-out both;
 }
 
-@keyframes fade-in {
+@keyframes hero-bg-in {
   from {
     opacity: 0;
   }
@@ -25,4 +27,3 @@
     opacity: 1;
   }
 }
-

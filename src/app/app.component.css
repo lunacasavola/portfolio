@@ -1,6 +1,7 @@
-/* Ensure proper z-index layering */
-.relative {
+/* Clip horizontal overflow from full-bleed backgrounds without creating a scroll container */
+.app-root {
   position: relative;
+  overflow-x: clip;
 }
 
 /* Main content should be above background */
@@ -8,4 +9,3 @@ main {
   position: relative;
   z-index: 10;
 }
-

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 interface ExperienceItem {
   company: string;
@@ -13,7 +14,7 @@ interface ExperienceItem {
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, RevealDirective],
   templateUrl: './experience.component.html'
 })
 export class ExperienceComponent {

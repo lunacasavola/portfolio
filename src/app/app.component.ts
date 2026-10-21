@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -32,54 +32,43 @@ import { ColorPickerComponent } from './components/color-picker/color-picker.com
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements AfterViewInit, OnDestroy {
   title = 'portfolio';
+  year = new Date().getFullYear();
   private sectionObserver?: IntersectionObserver;
 
   constructor(private translate: TranslateService) {
     const saved = localStorage.getItem('lang') || 'en';
     this.translate.use(saved);
-  }
-
-  ngOnInit(): void {
-    // Component initialization
+    document.documentElement.lang = saved;
   }
 
   ngAfterViewInit(): void {
-    // Set up section visibility observer for animations
-    setTimeout(() => {
-      this.setupSectionObserver();
-    }, 500);
+    this.setupSectionObserver();
   }
 
   ngOnDestroy(): void {
-    if (this.sectionObserver) {
-      this.sectionObserver.disconnect();
-    }
+    this.sectionObserver?.disconnect();
   }
 
+  // Draws the accent divider line of each section once it scrolls into view.
+  // Content animations are handled per element by RevealDirective.
   private setupSectionObserver(): void {
     const sections = document.querySelectorAll('.section');
     if (sections.length === 0) return;
 
     this.sectionObserver = new IntersectionObserver(
-      (entries) => {
+      (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // Trigger slide-up animation
-            entry.target.classList.add('animate-slide-up');
+            observer.unobserve(entry.target);
           }
         });
       },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-      }
+      { threshold: 0.1, rootMargin: '0px 0px -80px 0px' }
     );
 
-    sections.forEach((section) => {
-      this.sectionObserver?.observe(section);
-    });
+    sections.forEach((section) => this.sectionObserver?.observe(section));
   }
 }

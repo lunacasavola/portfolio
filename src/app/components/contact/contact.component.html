@@ -1,38 +1,54 @@
-<h2 class="section-title">{{ 'contact.title' | translate }}</h2>
+<h2 class="section-title" appReveal>{{ 'contact.title' | translate }}</h2>
 
 <div class="grid md:grid-cols-2 gap-6">
-  <form [formGroup]="form" (ngSubmit)="submit()" class="glass p-6 space-y-4">
-    <div>
-      <label class="block text-sm text-white/70 mb-1">{{ 'contact.name' | translate }}</label>
-      <input formControlName="name" class="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-[#00ff41]/40" />
-      <div class="text-xs text-red-400 mt-1" *ngIf="submitted && form.controls.name.invalid">{{ 'contact.requiredName' | translate }}</div>
-    </div>
-    <div>
-      <label class="block text-sm text-white/70 mb-1">{{ 'contact.email' | translate }}</label>
-      <input formControlName="email" type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-[#00ff41]/40" />
-      <div class="text-xs text-red-400 mt-1" *ngIf="submitted && form.controls.email.invalid">{{ 'contact.requiredEmail' | translate }}</div>
-    </div>
-    <div>
-      <label class="block text-sm text-white/70 mb-1">{{ 'contact.message' | translate }}</label>
-      <textarea formControlName="message" rows="5" class="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-[#00ff41]/40"></textarea>
-      <div class="text-xs text-red-400 mt-1" *ngIf="submitted && form.controls.message.invalid">{{ 'contact.requiredMessage' | translate }}</div>
-    </div>
-    <button type="submit" class="btn-accent">{{ 'contact.send' | translate }}</button>
-  </form>
+  <div appReveal [revealDelay]="80">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="glass p-6 space-y-4" novalidate>
+      <div>
+        <label for="contact-name" class="block text-sm text-white/70 mb-1">{{ 'contact.name' | translate }}</label>
+        <input id="contact-name" formControlName="name" autocomplete="name" class="input-field" />
+        <div class="text-xs text-red-400 mt-1" *ngIf="submitted && form.controls.name.invalid">{{ 'contact.requiredName' | translate }}</div>
+      </div>
+      <div>
+        <label for="contact-email" class="block text-sm text-white/70 mb-1">{{ 'contact.email' | translate }}</label>
+        <input id="contact-email" formControlName="email" type="email" autocomplete="email" class="input-field" />
+        <div class="text-xs text-red-400 mt-1" *ngIf="submitted && form.controls.email.invalid">{{ 'contact.requiredEmail' | translate }}</div>
+      </div>
+      <div>
+        <label for="contact-message" class="block text-sm text-white/70 mb-1">{{ 'contact.message' | translate }}</label>
+        <textarea id="contact-message" formControlName="message" rows="5" class="input-field resize-y"></textarea>
+        <div class="text-xs text-red-400 mt-1" *ngIf="submitted && form.controls.message.invalid">{{ 'contact.requiredMessage' | translate }}</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <button type="submit" class="btn-accent">
+          {{ 'contact.send' | translate }}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </button>
+        <span *ngIf="sent" class="hero-in text-sm text-accent-400">{{ 'contact.thanks' | translate }}</span>
+      </div>
+    </form>
+  </div>
 
   <div class="space-y-4">
-    <div class="glass p-4">
-      <div class="font-medium">{{ 'contact.email' | translate }}</div>
-      <a class="link-glow" href="mailto:casavolalc@gmail.com">casavolalc&#64;gmail.com</a>
+    <div appReveal [revealDelay]="160">
+      <div class="glass card-lift p-4">
+        <div class="font-medium">{{ 'contact.email' | translate }}</div>
+        <a class="link-glow" href="mailto:casavolalc@gmail.com">casavolalc&#64;gmail.com</a>
+      </div>
     </div>
 
-    <div class="glass p-4">
-      <div class="font-medium">{{ 'contact.linkedin' | translate }}</div>
-      <a class="link-glow" href="https://www.linkedin.com/in/lunacasavola" target="_blank" rel="noopener">linkedin.com/in/lunacasavola</a>
+    <div appReveal [revealDelay]="240">
+      <div class="glass card-lift p-4">
+        <div class="font-medium">{{ 'contact.linkedin' | translate }}</div>
+        <a class="link-glow" href="https://www.linkedin.com/in/lunacasavola" target="_blank" rel="noopener">linkedin.com/in/lunacasavola</a>
+      </div>
     </div>
 
-    <div class="glass p-4">
-      <a class="btn-accent" href="assets/Luna-Casavola-CV.pdf" download="Luna-Casavola-CV.pdf">{{ 'contact.cv' | translate }}</a>
+    <div appReveal [revealDelay]="320">
+      <div class="glass p-4">
+        <a class="btn-accent" href="assets/Luna-Casavola-CV.pdf" download="Luna-Casavola-CV.pdf">{{ 'contact.cv' | translate }}</a>
+      </div>
     </div>
   </div>
 </div>

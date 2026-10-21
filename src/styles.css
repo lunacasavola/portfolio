@@ -4,32 +4,45 @@
 
 :root {
   --accent: #00ff41; /* matrix green */
-  --accent-strong: #00cc33; /* darker matrix green */
-  --accent-light: rgb(51, 255, 102); /* lighter variant */
-  --accent-dark: rgb(0, 204, 51); /* darker variant */
+  --accent-light: rgb(77, 255, 122); /* lighter variant */
+  --accent-dark: rgb(0, 204, 52); /* darker variant */
   --accent-rgb: 0, 255, 65; /* RGB values for rgba() usage */
-}
-
-html, body {
-  height: 100%;
-}
-
-body {
-  @apply bg-[#0b0d10] text-white font-inter antialiased selection:bg-[#00ff41]/20 selection:text-white;
+  --accent-light-rgb: 77, 255, 122;
+  --accent-dark-rgb: 0, 204, 52;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-offset: 6rem;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-offset);
 }
 
+body {
+  @apply bg-[#0b0d10] text-white font-inter antialiased selection:bg-accent/20 selection:text-white;
+  min-height: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(var(--accent-rgb), 0.6);
+  outline-offset: 2px;
+}
+
+/* Component classes live in the components layer so Tailwind utilities can override them */
+@layer components {
 .glass {
   @apply bg-white/5 backdrop-blur-md shadow-glass border border-white/10 rounded-xl;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.4s var(--ease-out-expo);
 }
 
 .glass:hover {
-  border-color: rgba(0, 255, 65, 0.2);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 20px rgba(0, 255, 65, 0.1);
+  border-color: rgba(var(--accent-rgb), 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 20px rgba(var(--accent-rgb), 0.1);
+}
+
+/* Cards that lift slightly on hover */
+.card-lift:hover {
+  transform: translateY(-4px);
 }
 
 .neumorph {
@@ -37,98 +50,61 @@ html {
 }
 
 .btn-accent {
-  @apply inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#00ff41] text-black font-medium shadow-glow transition hover:bg-[#33ff66] hover:shadow-[0_0_30px_rgba(0,255,65,0.55)] focus:outline-none focus:ring-2 focus:ring-[#00ff41]/40;
+  @apply inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-accent text-black font-medium shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
+.btn-accent:hover {
+  @apply bg-accent-400;
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.55);
+}
+
+.btn-accent:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Light sweep across the button on hover */
 .btn-accent::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.7s var(--ease-out-expo);
 }
 
 .btn-accent:hover::before {
-  width: 300px;
-  height: 300px;
+  transform: translateX(100%);
 }
 
 .btn-ghost {
-  @apply inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 text-white border border-white/10 transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20;
+  @apply inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 text-white border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20;
   position: relative;
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-ghost:hover {
-  border-color: rgba(0, 255, 65, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  @apply bg-white/10;
+  transform: translateY(-2px);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.2);
 }
 
-.section {
-  @apply py-20 md:py-28;
+.btn-ghost:active {
+  transform: translateY(0) scale(0.98);
 }
 
-.section-title {
-  @apply text-2xl md:text-3xl font-semibold tracking-tight mb-8;
-}
-
-.chip {
-  @apply px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-white/80;
-}
-
-.link-glow {
-  @apply text-[#33ff66] hover:text-[#00ff41] transition;
-}
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Terminal/Hacker aesthetic enhancements */
-.text-glow {
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 20px rgba(0, 255, 65, 0.3);
-  transition: text-shadow 0.3s ease;
-}
-
-.text-glow:hover {
-  text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.5), 0 0 40px rgba(0, 255, 65, 0.3);
-}
-
-/* Enhanced section title with glow */
-.section-title {
-  animation: text-glow 3s ease-in-out infinite;
-}
-
-.neon-border {
-  border: 1px solid rgba(0, 255, 65, 0.3);
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.1);
-  transition: all 0.3s ease;
-}
-
-.neon-border:hover {
-  border-color: rgba(0, 255, 65, 0.6);
-  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), inset 0 0 20px rgba(0, 255, 65, 0.2);
-}
-
-/* Enhanced section animations */
 .section {
   @apply py-20 md:py-28;
   position: relative;
 }
 
+/* Thin accent line that draws in when the section enters the viewport */
 .section::before {
   content: '';
   position: absolute;
@@ -136,16 +112,94 @@ html {
   left: 0;
   right: 0;
   height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.35), transparent);
+  transform: scaleX(0);
+  transition: transform 1.2s var(--ease-out-expo);
 }
 
 .section.visible::before {
-  opacity: 1;
+  transform: scaleX(1);
 }
 
-/* Terminal-style code lines effect */
+#hero.section::before {
+  display: none;
+}
+
+.section-title {
+  @apply text-2xl md:text-3xl font-semibold tracking-tight mb-8;
+}
+
+.section-title::before {
+  content: '>';
+  @apply font-mono text-accent mr-3;
+  text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.6);
+}
+
+.chip {
+  @apply px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-white/80;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.chip:hover {
+  @apply bg-white/10;
+}
+
+.chip-active {
+  @apply bg-accent/15 border-accent/40 text-accent-400;
+}
+
+.link-glow {
+  @apply text-accent-400 hover:text-accent transition-colors;
+}
+
+.input-field {
+  @apply w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 outline-none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.input-field:focus {
+  @apply bg-white/[0.07];
+  border-color: rgba(var(--accent-rgb), 0.5);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+}
+}
+
+/* Scroll reveal (driven by RevealDirective) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease-out var(--reveal-delay, 0ms),
+    transform 0.9s var(--ease-out-expo) var(--reveal-delay, 0ms);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Terminal/Hacker aesthetic enhancements */
+.text-glow {
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.45), 0 0 24px rgba(var(--accent-rgb), 0.25);
+  transition: text-shadow 0.4s ease;
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 16px rgba(var(--accent-rgb), 0.7), 0 0 32px rgba(var(--accent-rgb), 0.4);
+}
+
+.neon-border {
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.2), inset 0 0 10px rgba(var(--accent-rgb), 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.neon-border:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4), inset 0 0 20px rgba(var(--accent-rgb), 0.2);
+}
+
+/* Terminal-style scan line, uses transform so it stays on the compositor */
 .code-line {
   position: relative;
   overflow: hidden;
@@ -154,42 +208,102 @@ html {
 .code-line::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-  animation: scan 3s ease-in-out infinite;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.12), transparent);
+  transform: translateX(-100%);
+  animation: scan 5s ease-in-out 1.5s infinite;
+  pointer-events: none;
 }
 
 @keyframes scan {
   0% {
-    left: -100%;
+    transform: translateX(-100%);
   }
-  50%, 100% {
-    left: 100%;
+  40%, 100% {
+    transform: translateX(100%);
   }
 }
 
-/* Glitch effect (subtle) */
+/* Chromatic glitch on hover (text-shadow only, no layout jitter) */
 @keyframes glitch {
   0%, 100% {
-    transform: translate(0);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.45);
   }
   20% {
-    transform: translate(-1px, 1px);
+    text-shadow: -2px 0 rgba(255, 0, 80, 0.7), 2px 0 rgba(var(--accent-rgb), 0.8);
   }
   40% {
-    transform: translate(-1px, -1px);
+    text-shadow: 2px 0 rgba(0, 200, 255, 0.7), -2px 0 rgba(var(--accent-rgb), 0.8);
   }
   60% {
-    transform: translate(1px, 1px);
+    text-shadow: -1px 0 rgba(255, 0, 80, 0.6), 1px 0 rgba(0, 200, 255, 0.6);
   }
   80% {
-    transform: translate(1px, -1px);
+    text-shadow: 1px 0 rgba(var(--accent-rgb), 0.8);
   }
 }
 
 .glitch-hover:hover {
-  animation: glitch 0.3s ease-in-out;
+  animation: glitch 0.4s steps(1, end);
+}
+
+/* Hero entrance */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.hero-in {
+  animation: hero-in 0.9s var(--ease-out-expo) both;
+}
+
+/* Modal transitions */
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal-backdrop {
+  animation: modal-backdrop-in 0.25s ease-out both;
+}
+
+.modal-panel {
+  animation: modal-in 0.4s var(--ease-out-expo) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
