@@ -2,19 +2,10 @@
   <app-hero-background></app-hero-background>
 
   <div class="relative z-10 w-full flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12 text-center md:text-left">
-    <img *ngIf="!photoMissing; else monogram" src="assets/profile.jpg" alt="Luna Casavola"
+    <!-- Only shown if assets/profile.jpg exists -->
+    <img *ngIf="!photoMissing" src="assets/profile.jpg" alt="Luna Casavola"
       class="hero-in w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover glass neumorph"
       (error)="photoMissing = true" />
-
-    <!-- Fallback when assets/profile.jpg isn't there -->
-    <ng-template #monogram>
-      <div class="hero-in shrink-0 relative w-32 h-32 md:w-40 md:h-40 rounded-2xl glass neumorph grid place-items-center overflow-hidden"
-        aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent"></div>
-        <span class="relative font-mono text-4xl md:text-5xl font-bold text-accent-400 text-glow">LC</span>
-        <span class="absolute bottom-3 left-0 right-0 text-center font-mono text-[10px] text-white/40">~/luna $</span>
-      </div>
-    </ng-template>
 
     <div>
       <p class="hero-in font-mono text-sm text-accent-400 mb-3" style="animation-delay: 0.1s">
@@ -43,6 +34,12 @@
       </div>
     </div>
   </div>
+
+  <button type="button" (click)="openTerminal()"
+    class="hero-in absolute bottom-12 inset-x-0 mx-auto w-fit z-10 hidden md:block font-mono text-xs text-white/35 hover:text-accent-400 transition-colors"
+    style="animation-delay: 1.4s">
+    {{ 'terminal.hint' | translate }}
+  </button>
 
   <a href="#summary" class="hero-in absolute bottom-0 inset-x-0 mx-auto w-fit z-10 hidden md:flex flex-col items-center gap-2 text-white/40 hover:text-accent-400 transition-colors"
     style="animation-delay: 1s" aria-label="Scroll down">

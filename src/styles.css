@@ -265,6 +265,17 @@ body {
   animation: hero-in 0.9s var(--ease-out-expo) both;
 }
 
+/* CRT scanlines + vignette for the retro terminal */
+.crt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.45) 100%);
+}
+
 /* Modal transitions */
 @keyframes modal-backdrop-in {
   from { opacity: 0; }

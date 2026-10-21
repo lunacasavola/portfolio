@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RevealDirective } from '../../directives/reveal.directive';
 
-interface Project {
+export interface Project {
   name: string;
   description: string;
   url?: string;
@@ -23,35 +23,7 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
 
   selectedVideo?: Project;
 
-  projects: Project[] = [
-    {
-      name: 'projects.stringSistemas.name',
-      description: 'projects.stringSistemas.description',
-      url: 'https://www.stringsistemas.com/',
-      imageUrl: 'assets/images/string-sistemas.png',
-      type: 'link'
-    },
-    {
-      name: 'projects.concreteQuality.name',
-      description: 'projects.concreteQuality.description',
-      url: 'https://www.concrete-quality.com/',
-      imageUrl: 'assets/images/cq.png',
-      type: 'link'
-    },
-    {
-      name: 'projects.hippieHouse.name',
-      description: 'projects.hippieHouse.description',
-      url: 'https://www.hippiehouse.tv/index.html',
-      imageUrl: 'assets/images/hh.png',
-      type: 'link'
-    },
-    {
-      name: 'projects.ariane.name',
-      description: 'projects.ariane.description',
-      videoSrc: 'assets/videos/videoariane.mp4',
-      type: 'video'
-    }
-  ];
+  projects = PROJECTS;
 
   private intersectionObserver?: IntersectionObserver;
 
@@ -106,3 +78,34 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
     document.body.style.overflow = locked ? 'hidden' : '';
   }
 }
+
+// Shared with the terminal's `projects` command
+export const PROJECTS: Project[] = [
+  {
+    name: 'projects.stringSistemas.name',
+    description: 'projects.stringSistemas.description',
+    url: 'https://www.stringsistemas.com/',
+    imageUrl: 'assets/images/string-sistemas.png',
+    type: 'link'
+  },
+  {
+    name: 'projects.concreteQuality.name',
+    description: 'projects.concreteQuality.description',
+    url: 'https://www.concrete-quality.com/',
+    imageUrl: 'assets/images/cq.png',
+    type: 'link'
+  },
+  {
+    name: 'projects.hippieHouse.name',
+    description: 'projects.hippieHouse.description',
+    url: 'https://www.hippiehouse.tv/index.html',
+    imageUrl: 'assets/images/hh.png',
+    type: 'link'
+  },
+  {
+    name: 'projects.ariane.name',
+    description: 'projects.ariane.description',
+    videoSrc: 'assets/videos/videoariane.mp4',
+    type: 'video'
+  }
+];

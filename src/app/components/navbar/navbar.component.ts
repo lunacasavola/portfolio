@@ -1,6 +1,8 @@
 import { Component, HostListener, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { TerminalService } from '../../services/terminal.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,9 +29,17 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   ];
 
   private sectionObserver?: IntersectionObserver;
+  private langSubscription: Subscription;
 
-  constructor(private translate: TranslateService, private zone: NgZone) {
+  constructor(private translate: TranslateService, private zone: NgZone, private terminal: TerminalService) {
     this.currentLang = this.translate.currentLang || localStorage.getItem('lang') || 'en';
+
+    // The language can also change from the terminal (`lang es`), so follow every change
+    this.langSubscription = this.translate.onLangChange.subscribe(({ lang }) => {
+      this.currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -52,6 +62,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sectionObserver?.disconnect();
+    this.langSubscription.unsubscribe();
   }
 
   @HostListener('window:scroll')
@@ -73,8 +84,10 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
 
   setLang(lang: 'en' | 'es') {
     this.translate.use(lang);
-    this.currentLang = lang;
-    localStorage.setItem('lang', lang);
-    document.documentElement.lang = lang;
+  }
+
+  openTerminal() {
+    this.menuOpen = false;
+    this.terminal.open();
   }
 }

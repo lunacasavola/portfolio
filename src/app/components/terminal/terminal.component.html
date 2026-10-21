@@ -1,0 +1,38 @@
+<div *ngIf="isOpen"
+  class="modal-backdrop fixed inset-0 z-[80] flex items-center justify-center bg-black/70 backdrop-blur-sm p-3 md:p-6"
+  (click)="close()" role="dialog" aria-modal="true" aria-label="Terminal">
+  <div class="modal-panel crt relative w-full max-w-3xl h-[75vh] md:h-[65vh] flex flex-col overflow-hidden border-4 border-double border-accent/60 bg-[#060807]/95 shadow-glow-lg font-mono text-[13px]"
+    (click)="$event.stopPropagation(); focusInput()">
+
+    <!-- Retro title bar (inverted, DOS style) -->
+    <div class="flex items-center justify-between gap-2 px-2 py-1 bg-accent text-black text-xs font-bold uppercase tracking-widest select-none">
+      <span>▓▒░ LUNA-OS v1.0 · TERMINAL ░▒▓</span>
+      <span class="flex items-center gap-1">
+        <span class="hidden sm:inline font-normal opacity-70">ESC</span>
+        <button type="button" class="px-1 hover:bg-black hover:text-accent" (click)="close()" aria-label="Close">[X]</button>
+      </span>
+    </div>
+
+    <!-- Output -->
+    <div #output class="relative flex-1 overflow-y-auto p-4 space-y-0.5 [text-shadow:0_0_6px_rgba(var(--accent-rgb),0.35)]">
+      <div *ngFor="let line of lines" class="break-words min-h-[1.25em]" [ngClass]="line.label && line.label !== prompt ? 'grid grid-cols-[minmax(7rem,auto)_1fr] gap-x-4' : ''">
+        <ng-container *ngIf="line.label === prompt; else regular">
+          <span class="text-accent-400">{{ prompt }}</span><span class="text-white ml-2">{{ line.text }}</span>
+        </ng-container>
+        <ng-template #regular>
+          <span *ngIf="line.label" class="text-accent-400">{{ line.label }}</span>
+          <a *ngIf="line.href; else plain" [href]="line.href" target="_blank" rel="noopener" class="link-glow underline underline-offset-2">{{ line.text }}</a>
+          <ng-template #plain><span class="whitespace-pre-wrap" [ngClass]="line.cls || 'text-white/80'">{{ line.text }}</span></ng-template>
+        </ng-template>
+      </div>
+
+      <!-- Input line -->
+      <div class="flex items-center gap-2 pt-1">
+        <label for="terminal-input" class="text-accent-400 shrink-0">{{ prompt }}</label>
+        <input #input id="terminal-input" [(ngModel)]="command" (keydown)="onInputKeydown($event)"
+          class="flex-1 min-w-0 bg-transparent !outline-none text-white caret-[var(--accent)]"
+          autocomplete="off" autocapitalize="off" spellcheck="false" />
+      </div>
+    </div>
+  </div>
+</div>

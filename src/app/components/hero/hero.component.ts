@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeroBackgroundComponent } from '../hero-background/hero-background.component';
+import { TerminalService } from '../../services/terminal.service';
 
 @Component({
   selector: 'app-hero',
@@ -12,6 +13,10 @@ import { HeroBackgroundComponent } from '../hero-background/hero-background.comp
 })
 export class HeroComponent {
   photoMissing = false;
+
+  constructor(private terminal: TerminalService) {}
+
+  openTerminal(): void {
+    this.terminal.open();
+  }
 }
-
-

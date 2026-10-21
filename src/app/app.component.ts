@@ -12,6 +12,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AnimatedBackgroundComponent } from './components/animated-background/animated-background.component';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { WmsSimComponent } from './components/wms-sim/wms-sim.component';
+import { TerminalComponent } from './components/terminal/terminal.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ import { WmsSimComponent } from './components/wms-sim/wms-sim.component';
     ContactComponent,
     AnimatedBackgroundComponent,
     ColorPickerComponent,
-    WmsSimComponent
+    WmsSimComponent,
+    TerminalComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
