@@ -50,8 +50,6 @@
     "title": "Projects",
     "subtitle": "Interactive previews of websites and projects I've worked on.",
     "visit": "Visit Site",
-    "video": "Video",
-    "watchVideo": "Watch preview",
     "stringSistemas": {
       "name": "String Sistemas",
       "description": "WMS and logistics software for warehouse operations, inventory, and product distribution."
@@ -63,10 +61,6 @@
     "hippieHouse": {
       "name": "Hippie House TV",
       "description": "Creative studio and audiovisual production website."
-    },
-    "ariane": {
-      "name": "Ariane quick preview",
-      "description": "Quick tour around Ariane in its mobile and desktop versions."
     }
   },
   "terminal": {

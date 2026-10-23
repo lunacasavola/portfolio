@@ -7,88 +7,29 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div *ngFor="let project of projects; let i = index" class="project-card" appReveal [revealDelay]="(i % 3) * 100">
       <div class="glass card-lift group overflow-hidden relative h-full flex flex-col hover:!border-accent/30 hover:!shadow-glow-lg">
+        <div class="aspect-video bg-gradient-to-br from-accent/20 via-accent-600/10 to-transparent relative overflow-hidden">
+          <img [src]="project.imageUrl" [alt]="project.name | translate" loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover object-top opacity-80 transition-[transform,opacity] duration-700 ease-out-expo group-hover:opacity-100 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b0d10]/70 via-transparent to-transparent"></div>
+        </div>
 
-        <!-- Link Project Content -->
-        <ng-container *ngIf="project.type === 'link'">
-          <div class="aspect-video bg-gradient-to-br from-accent/20 via-accent-600/10 to-transparent relative overflow-hidden">
-            <img *ngIf="project.imageUrl" [src]="project.imageUrl" [alt]="project.name | translate" loading="lazy"
-              class="absolute inset-0 w-full h-full object-cover object-top opacity-80 transition-[transform,opacity] duration-700 ease-out-expo group-hover:opacity-100 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0d10]/70 via-transparent to-transparent"></div>
-          </div>
-
-          <div class="p-6 flex-1 flex flex-col">
-            <h3 class="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent-400">
-              {{ project.name | translate }}
-            </h3>
-            <p class="text-white/60 text-sm mb-6 flex-1">
-              {{ project.description | translate }}
-            </p>
-            <a [href]="project.url" target="_blank" rel="noopener noreferrer"
-              class="btn-ghost w-full justify-center group-hover:border-accent/50 group-hover:text-accent-400">
-              <span>{{ 'projects.visit' | translate }}</span>
-              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-              </svg>
-            </a>
-          </div>
-        </ng-container>
-
-        <!-- Video Project Content -->
-        <ng-container *ngIf="project.type === 'video'">
-          <button type="button" (click)="openVideo(project)"
-            class="aspect-video relative overflow-hidden bg-black/30 cursor-pointer text-left"
-            [attr.aria-label]="'projects.watchVideo' | translate">
-            <video #videoElement [src]="project.videoSrc" muted loop playsinline preload="metadata"
-              class="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"></video>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
-
-            <!-- Play button -->
-            <span class="absolute inset-0 grid place-items-center">
-              <span class="w-14 h-14 rounded-full bg-accent/20 border border-accent/40 backdrop-blur-sm grid place-items-center text-accent-400 scale-90 opacity-0 transition-all duration-500 ease-out-expo group-hover:scale-100 group-hover:opacity-100">
-                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-              </span>
-            </span>
-
-            <span class="absolute top-4 right-4 chip bg-accent/20 border-accent/30 text-accent-400 text-xs">
-              {{ 'projects.video' | translate }}
-            </span>
-
-            <span class="absolute bottom-4 left-4 chip text-xs bg-black/60 border-white/20 text-white backdrop-blur-sm group-hover:bg-accent/20 group-hover:border-accent/30 group-hover:text-accent-400">
-              <svg class="w-3.5 h-3.5 inline mr-1 -mt-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-              {{ 'projects.watchVideo' | translate }}
-            </span>
-          </button>
-
-          <div class="p-6 flex-1 flex flex-col">
-            <h3 class="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent-400">
-              {{ project.name | translate }}
-            </h3>
-            <p class="text-white/60 text-sm">
-              {{ project.description | translate }}
-            </p>
-          </div>
-        </ng-container>
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent-400">
+            {{ project.name | translate }}
+          </h3>
+          <p class="text-white/60 text-sm mb-6 flex-1">
+            {{ project.description | translate }}
+          </p>
+          <a [href]="project.url" target="_blank" rel="noopener noreferrer"
+            class="btn-ghost w-full justify-center group-hover:border-accent/50 group-hover:text-accent-400">
+            <span>{{ 'projects.visit' | translate }}</span>
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Video Modal -->
-  <div *ngIf="selectedVideo"
-    class="modal-backdrop fixed inset-0 z-[60] flex items-center justify-center bg-black/85 backdrop-blur-sm p-4"
-    (click)="closeVideo()" role="dialog" aria-modal="true">
-    <div class="modal-panel relative w-full max-w-6xl" (click)="$event.stopPropagation()">
-      <button type="button"
-        class="absolute -top-12 right-0 w-10 h-10 grid place-items-center rounded-full text-white/80 hover:text-accent-400 hover:bg-white/10 transition-colors"
-        (click)="closeVideo()" aria-label="Close video">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-
-      <video [src]="selectedVideo.videoSrc" controls autoplay playsinline
-        class="w-full max-h-[85vh] object-contain rounded-xl shadow-2xl ring-1 ring-white/10 bg-black"></video>
     </div>
   </div>
 </div>

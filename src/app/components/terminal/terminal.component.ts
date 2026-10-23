@@ -233,7 +233,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
     PROJECTS.forEach(project => {
       this.print(`▸ ${this.t(project.name)}`, 'text-white');
       this.print(`  ${this.t(project.description)}`, 'text-white/60');
-      if (project.url) this.lines.push({ text: `  ${project.url}`, href: project.url });
+      this.lines.push({ text: `  ${project.url}`, href: project.url });
     });
   }
 
