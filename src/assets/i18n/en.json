@@ -5,7 +5,7 @@
     "summary": "Summary",
     "skills": "Skills",
     "projects": "Projects",
-    "wms": "WMS Demo",
+    "wms": "PTL Sim",
     "experience": "Experience",
     "contact": "Contact"
   },
@@ -18,7 +18,7 @@
   "info": {
     "title": "General Info",
     "age": "Age",
-    "ageValue": "24",
+    "ageValue": "25",
     "location": "Location",
     "locationValue": "Buenos Aires, Argentina",
     "email": "Email",
@@ -69,7 +69,7 @@
   },
   "terminal": {
     "open": "Open terminal",
-    "hint": "psst… press Ctrl+K or ` to open the terminal",
+    "hint": "Press Ctrl+K or ` to open the terminal",
     "welcome": "Welcome to Luna's portfolio terminal. Type 'help' to see what you can do.",
     "notFound": "command not found: {{cmd}}. Type 'help' for the list of commands.",
     "noSection": "no such section: {{name}}. Try 'ls'.",
@@ -110,8 +110,8 @@
     }
   },
   "wms": {
-    "title": "Try my WMS",
-    "subtitle": "I build warehouse software: pick-to-light, robotic sorters, Zebra handhelds and ZPL labels. Instead of telling you about it, pick an order yourself.",
+    "title": "Pick-To-Light Simulator",
+    "subtitle": "I have built warehouse software: pick-to-light, robotic sorters, Zebra handhelds and ZPL labels. Instead of telling you about it, pick an order yourself.",
     "device": "WMS · HANDHELD",
     "idleHint": "An order is waiting to be released to the warehouse floor.",
     "start": "Release order",
