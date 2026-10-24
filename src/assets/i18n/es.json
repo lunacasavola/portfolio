@@ -5,7 +5,7 @@
     "summary": "Resumen",
     "skills": "Tecnologías",
     "projects": "Proyectos",
-    "wms": "Demo WMS",
+    "wms": "Simulador PTL",
     "experience": "Experiencia",
     "contact": "Contacto"
   },
@@ -18,7 +18,7 @@
   "info": {
     "title": "Información General",
     "age": "Edad",
-    "ageValue": "24",
+    "ageValue": "25",
     "location": "Ubicación",
     "locationValue": "Buenos Aires, Argentina",
     "email": "Correo",
@@ -69,7 +69,7 @@
   },
   "terminal": {
     "open": "Abrir terminal",
-    "hint": "psst… apretá Ctrl+K o ` para abrir la terminal",
+    "hint": "Apretá Ctrl+K o ` para abrir la terminal",
     "welcome": "Bienvenido/a a la terminal del portfolio de Luna. Escribí 'help' para ver qué podés hacer.",
     "notFound": "comando no encontrado: {{cmd}}. Escribí 'help' para ver la lista.",
     "noSection": "no existe la sección: {{name}}. Probá con 'ls'.",
@@ -110,8 +110,8 @@
     }
   },
   "wms": {
-    "title": "Probá mi WMS",
-    "subtitle": "Desarrollo software para depósitos: pick-to-light, sorters robóticos, handhelds Zebra y etiquetas ZPL. En vez de contártelo, prepará un pedido vos.",
+    "title": "Simulador de Pick-To-light",
+    "subtitle": "Desarrollé software para depósitos: pick-to-light, sorters robóticos, handhelds Zebra y etiquetas ZPL. En vez de contártelo, ¡probalo preparando un pedido!",
     "device": "WMS · HANDHELD",
     "idleHint": "Hay un pedido esperando ser liberado al depósito.",
     "start": "Liberar pedido",
