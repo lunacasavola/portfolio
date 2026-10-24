@@ -1,0 +1,20 @@
+<h2 class="section-title" appReveal>{{ 'focus.title' | translate }}</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div *ngFor="let area of areas; let i = index" appReveal [revealDelay]="(i % 3) * 80">
+    <div class="glass card-lift h-full p-5 flex flex-col gap-3">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl" aria-hidden="true">{{ area.icon }}</span>
+        <h3 class="font-semibold">{{ 'focus.' + area.key + '.name' | translate }}</h3>
+      </div>
+      <p class="text-sm text-white/60">{{ 'focus.' + area.key + '.description' | translate }}</p>
+      <p class="text-sm text-white/80 flex-1">
+        <span class="font-mono text-xs text-accent-400">→ {{ 'focus.transfer' | translate }}</span>
+        {{ 'focus.' + area.key + '.transfer' | translate }}
+      </p>
+      <div class="flex flex-wrap gap-1.5">
+        <span *ngFor="let tech of area.stack" class="chip !text-[11px] !px-2 !py-0.5 text-accent-400/90">{{ tech }}</span>
+      </div>
+    </div>
+  </div>
+</div>

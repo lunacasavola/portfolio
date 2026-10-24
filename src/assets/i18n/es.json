@@ -11,7 +11,7 @@
   },
   "hero": {
     "title": "Luna Casavola",
-    "subtitle": "Desarrolladora Full-Stack | .NET • Angular • SQL Server",
+    "subtitle": "Desarrolladora Full-Stack | .NET • Angular • React • SQL Server",
     "cv": "Descargar CV",
     "linkedin": "LinkedIn"
   },
@@ -29,7 +29,7 @@
   },
   "summary": {
     "title": "Resumen Profesional",
-    "p1": "Desarrolladora Full-Stack con más de 3 años de experiencia diseñando, desarrollando y manteniendo aplicaciones web empresariales con C#, .NET/.NET Core, Angular, TypeScript, APIs REST y SQL Server. Sólida trayectoria en desarrollo backend, lógica de negocio, aplicaciones basadas en bases de datos e integraciones de sistemas.",
+    "p1": "Desarrolladora Full-Stack con más de 4 años de experiencia diseñando, desarrollando y manteniendo aplicaciones web empresariales con C#, .NET, Angular, React/Next.js, TypeScript, APIs REST, SQL Server y MySQL, desplegadas con Docker en Google Cloud. Sólida trayectoria en desarrollo backend, lógica de negocio, aplicaciones basadas en bases de datos e integraciones de sistemas.",
     "p2": "Experiencia desarrollando productos de software configurables para múltiples clientes, implementando reglas de negocio y funcionalidades específicas de cada cliente mientras se mantiene un núcleo de aplicación compartido. Experiencia práctica con WMS, sistemas de inventario y logística, automatización de almacenes, soporte en producción e integraciones con sistemas y dispositivos externos.",
     "p3": "Fuertes habilidades de resolución de problemas y depuración, con experiencia trabajando en capas de backend, frontend, base de datos e integración. Cómoda colaborando con stakeholders técnicos y no técnicos, analizando requerimientos y aprendiendo nuevas tecnologías y arquitecturas.",
     "interestsTitle": "Intereses Profesionales",
@@ -41,10 +41,14 @@
     "databases": "Bases de datos",
     "frontend": "Frontend",
     "mobile": "Desarrollo móvil",
-    "devops": "DevOps y herramientas",
+    "devops": "Cloud y DevOps",
     "systems": "Sistemas e integraciones",
     "practices": "Prácticas de ingeniería",
-    "domain": "Dominio"
+    "domain": "Dominio",
+    "security": "Autenticación y seguridad",
+    "ai": "IA",
+    "visual": "Animación y visualización de datos",
+    "testing": "Testing y calidad"
   },
   "projects": {
     "title": "Proyectos",
@@ -201,5 +205,39 @@
     "requiredEmail": "Se requiere un correo válido",
     "requiredMessage": "Obligatorio (mín. 10)",
     "thanks": "¡Gracias! Mensaje enviado."
+  },
+  "focus": {
+    "title": "Áreas de trabajo",
+    "transfer": "Sirve para",
+    "apis": {
+      "name": "APIs y servicios backend",
+      "description": "Desarrollar y mantener servicios .NET: endpoints, reglas de negocio, acceso a datos y tareas en segundo plano.",
+      "transfer": "cualquier producto que necesite un backend confiable"
+    },
+    "frontend": {
+      "name": "Interfaces web",
+      "description": "Construir pantallas, formularios y paneles con React/Next.js y Angular.",
+      "transfer": "cualquier aplicación web, desde herramientas internas hasta sitios públicos"
+    },
+    "security": {
+      "name": "Autenticación y seguridad",
+      "description": "Implementar flujos de login, tokens y reglas de acceso, con buenas prácticas como rate limiting y validación de datos.",
+      "transfer": "cualquier aplicación con usuarios y datos sensibles"
+    },
+    "integrations": {
+      "name": "Integraciones",
+      "description": "Conectar sistemas mediante APIs externas, webhooks, emails, intercambio de archivos y servicios legados.",
+      "transfer": "cualquier proyecto que tenga que hablar con otros sistemas"
+    },
+    "cloud": {
+      "name": "Contenedores y CI/CD",
+      "description": "Empaquetar servicios con Docker y armar pipelines que los compilen, prueben y desplieguen en la nube.",
+      "transfer": "entregar seguido y sin sorpresas"
+    },
+    "ai": {
+      "name": "Automatización con IA",
+      "description": "Usar IA generativa y OCR para leer documentos y agilizar tareas repetitivas.",
+      "transfer": "cualquier proceso con pasos manuales y repetitivos"
+    }
   }
 }

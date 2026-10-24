@@ -20,7 +20,7 @@ interface Line {
 const PROMPT = 'luna@portfolio:~$';
 
 // Section ids on the page, and the "directories" shown by `ls`
-const SECTIONS = ['home', 'summary', 'projects', 'wms', 'skills', 'experience', 'info', 'contact'];
+const SECTIONS = ['home', 'summary', 'projects', 'focus', 'wms', 'skills', 'experience', 'info', 'contact'];
 
 const THEMES: Record<string, string> = {
   matrix: '#00ff41',

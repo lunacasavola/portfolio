@@ -11,7 +11,7 @@
   },
   "hero": {
     "title": "Luna Casavola",
-    "subtitle": "Full-Stack Developer | .NET • Angular • SQL Server",
+    "subtitle": "Full-Stack Developer | .NET • Angular • React • SQL Server",
     "cv": "Download CV",
     "linkedin": "LinkedIn"
   },
@@ -29,7 +29,7 @@
   },
   "summary": {
     "title": "Professional Summary",
-    "p1": "Full-Stack Developer with 3+ years of experience designing, developing, and maintaining enterprise web applications using C#, .NET/.NET Core, Angular, TypeScript, REST APIs, and SQL Server. Strong background in backend development, business logic, database-driven applications, and system integrations.",
+    "p1": "Full-Stack Developer with 4+ years of experience designing, developing, and maintaining enterprise web applications using C#, .NET, Angular, React/Next.js, TypeScript, REST APIs, SQL Server and MySQL, deployed with Docker on Google Cloud. Strong background in backend development, business logic, database-driven applications, and system integrations.",
     "p2": "Experienced developing configurable software products for multiple customers, implementing customer-specific business rules and functionality while maintaining a shared application core. Hands-on experience with WMS, inventory and logistics systems, warehouse automation, production support, and integrations with external systems and devices.",
     "p3": "Strong problem-solving and debugging skills, with experience working across backend, frontend, database, and integration layers. Comfortable collaborating with technical and non-technical stakeholders, analyzing requirements, and learning new technologies and architectures.",
     "interestsTitle": "Professional Interests",
@@ -41,10 +41,14 @@
     "databases": "Databases",
     "frontend": "Frontend",
     "mobile": "Mobile Development",
-    "devops": "DevOps & Tools",
+    "devops": "Cloud & DevOps",
     "systems": "Systems & Integrations",
     "practices": "Engineering Practices",
-    "domain": "Domain"
+    "domain": "Domain",
+    "security": "Auth & Security",
+    "ai": "AI",
+    "visual": "Animation & Data Viz",
+    "testing": "Testing & Quality"
   },
   "projects": {
     "title": "Projects",
@@ -201,5 +205,39 @@
     "requiredEmail": "Valid email required",
     "requiredMessage": "Required (min 10)",
     "thanks": "Thanks! Message sent."
+  },
+  "focus": {
+    "title": "Focus areas",
+    "transfer": "Useful for",
+    "apis": {
+      "name": "APIs & backend services",
+      "description": "Build and maintain .NET services: endpoints, business rules, data access and background tasks.",
+      "transfer": "any product that needs a reliable backend"
+    },
+    "frontend": {
+      "name": "Web interfaces",
+      "description": "Build screens, forms and admin panels with React/Next.js and Angular.",
+      "transfer": "any web app, from internal tools to public sites"
+    },
+    "security": {
+      "name": "Authentication & security",
+      "description": "Implement login flows, tokens and access rules, with good practices like rate limiting and input validation.",
+      "transfer": "any app with users and sensitive data"
+    },
+    "integrations": {
+      "name": "Integrations",
+      "description": "Connect systems through external APIs, webhooks, email, file exchange and legacy services.",
+      "transfer": "any project that has to talk to other systems"
+    },
+    "cloud": {
+      "name": "Containers & CI/CD",
+      "description": "Package services with Docker and set up pipelines that build, test and deploy them to the cloud.",
+      "transfer": "frequent, repeatable releases"
+    },
+    "ai": {
+      "name": "AI-assisted automation",
+      "description": "Use generative AI and OCR to read documents and speed up repetitive tasks.",
+      "transfer": "any process with manual, repetitive steps"
+    }
   }
 }

@@ -13,6 +13,7 @@ import { AnimatedBackgroundComponent } from './components/animated-background/an
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { WmsSimComponent } from './components/wms-sim/wms-sim.component';
 import { TerminalComponent } from './components/terminal/terminal.component';
+import { FocusAreasComponent } from './components/focus-areas/focus-areas.component';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,8 @@ import { TerminalComponent } from './components/terminal/terminal.component';
     AnimatedBackgroundComponent,
     ColorPickerComponent,
     WmsSimComponent,
-    TerminalComponent
+    TerminalComponent,
+    FocusAreasComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
